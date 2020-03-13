@@ -1,0 +1,2948 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Index";
+
+}
+    <style>
+        /*
+        input[type="submit"]
+            {
+                font-size:12px;
+            }*/
+
+        
+    </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+
+<div class="col-lg-12 top5" align="center">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#prodFin">Productos Financieros</a></li>
+            <li class="breadcrumb-item"><a href="#carrouselDiv">Carrousel</a></li>
+            <li class="breadcrumb-item"><a href="#videosDiv">Videos</a></li>
+            <li class="breadcrumb-item"><a href="#costoyconsulta">Costos y las comisiones</a></li>
+            <li class="breadcrumb-item"><a href="#UNEdiv">UNE </a></li>
+            <li class="breadcrumb-item"><a href="#misionvisiondiv">Mision / Vision / Datos de complemento </a></li>
+            <li class="breadcrumb-item"><a href="#BarrasDiv">Barras </a></li>
+            <li class="breadcrumb-item"><a href="#sucursalesDiv">Sucursales</a></li>
+            <li class="breadcrumb-item"><a href="#InfoFinDiv">Información Financiera</a></li>
+            <li class="breadcrumb-item"><a href="#promocionesDiv">Promociones</a></li>
+            <li class="breadcrumb-item"><a href="#contadores">Contadores</a></li>
+            <li class="breadcrumb-item"><a href="#datoscontacto">Datos de contacto</a></li>
+            <li class="breadcrumb-item"><a href="#anuncioCookies">Anuncio de Cookies</a></li>
+            <li class="breadcrumb-item"><a href="#beneficios">Beneficios</a></li>
+            <li class="breadcrumb-item"><a href="#valoresdelaempresa">Valores de la empresa</a></li>
+            <li class="breadcrumb-item"><a href="#codigodeetica">Código de ética</a></li>
+
+
+
+        </ol>
+    </nav>
+
+</div>
+<div class="row top7">
+
+    <div class="col-lg-12" id="prodFin">
+
+        <h2>Productos Financieros</h2>
+
+
+
+    </div>
+
+    <div class="col-lg-6 col-md-6" align="center">
+
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h3>Agregar Producto</h3>
+            </div>
+            <div class="card-body">
+                <a class="btn btn-default form-control" data-toggle="collapse" href="#collapseFormInsertProducto" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <font size="3">  Agregar</font>
+                </a>
+                <div class="collapse" id="collapseFormInsertProducto">
+                    <div class="card card-body" style="padding:18px">
+                        @using (Html.BeginForm("InsertProductoFinanciero", "DashboardAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                            <br />
+                            <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                            <img id="PreviewImage" class="" width="180" height="240" src=""
+                                 alt="Imagen de crédito" style="height:100px;" required />
+
+                            <br>
+                            <input name="files" class="form-control" id="file_prodfin" onchange="readURL(this);" type="file" required />
+
+                            <input type="text" class="form-control" name="title" id="titleCredito" placeholder="Nombre del Producto / Credito EJEMPLO" required />
+                            <input type="text" class="form-control" name="descripcion" id="descrpcionCredito" placeholder="Descripción" required />
+                            <input type="text" class="form-control" name="montoCredito" id="montoCredito" placeholder="Monto de Crédito" required />
+                            <input type="number" min="84" max="365" class="form-control" name="plazoMinimo" id="plazoMinimoCredito" placeholder="Plazo Máximo en días" required />
+                            <input type="number" min="84" max="365" class="form-control" name="plazoMaximo" id="plazoMaximoCredito" placeholder="Plazo Mínimo en días" required />
+
+                            <input type="text" class="form-control" name="frecuenciasDePago" id="frecuenciaDePagosCredito" placeholder="Frecuencia De Pagos" required />
+                            <input type="text" class="form-control" name="esquemaDeCobro" id="esquemaDeCobroCredito" placeholder="Esquema De Cobro" required />
+                            <input type="text" class="form-control" name="requisitos" id="requisitosCredito" placeholder="Requisitos" required />
+                            <input type="text" class="form-control" name="tasaDeInteres" id="tasaDeInteresPonderadaAnualCredito" placeholder="Tasa De Interes Ponderada Anual" required />
+
+                            <input type="text" class="form-control" name="CAT" id=" " placeholder="Descripción Tasa De Interes Ponderada Anual" required />
+
+                            <input type="text" class="form-control" name="costoTotalAnualCredito" id="costoTotalAnualDescripcionCredito" placeholder="Costo Total Anual Descripcion" required />
+                            <br />
+                            <label>Interés </label> <br />
+                            <small>Puedes agregar otras tasas , más adelante</small>
+                            <br />
+                            <input type="text" class="form-control" name="interes" placeholder=" 1.0 % " />
+
+                            <br />
+                            <label>
+                                TECNOLOGIA CREDITICIA
+                            </label>
+                            <br />
+
+                            <select name="tencologiaCrediticia" class="form-control" required>
+                                <option value="Grupal">Grupal</option>
+                                <option value="Individual">Individual</option>
+                            </select>
+                            <br />
+
+                            <input type="text" class="form-control" name="tipocredito" id="tipocredito" placeholder="tipo credito" required />
+                            <br />
+
+                            <label>Integrantes</label><br />
+                            <input type="number" class="form-control" name="numeroDeIntegrantes" id="numeroDeIntegrantes"
+                                   placeholder="numeroDeIntegrantes" required />
+                            <br />
+
+                            <label>Rango de Edad</label><br />
+                            <input type="text" class="form-control" name="edad" id="edadrange"
+                                   placeholder="18 - 60" required />
+                            <br />
+                            <textarea name="otrasComisones" placeholder="Otras comisiones" class="form-control"></textarea>
+                            <br />
+
+                            <label>TIEMPO DE RETORNO DEL PAGO SEMANAL</label>
+                            <input type="text" class="form-control" name="tipoRetornoPagoSemanal" id="tipoRetornoPagoSemanal"
+                                   placeholder="Mínimo 7 días - Máximo 21 días" required />
+                            <br />
+                            <label>TIEMPO DE RETORNO DEL PAGO CATORCENAL</label>
+                            <input type="text" class="form-control" name="tipoRetornoPagocatorcenal" id="tipoRetornoPagocatorcenal"
+                                   placeholder="Mínimo 14 días - Máximo 30 días" required />
+
+                            <br />
+                            <label>TIEMPO DE RETORNO DEL PAGO CADA 28 DIAS</label>
+                            <input type="text" class="form-control" name="tipoRetornoPago28Dias" id="tipoRetornoPago28Dias"
+                                   placeholder="Mínimo 28 días - Máximo 45 días" required />
+
+                            <br />
+
+                            <label>Solo para clientes</label>
+                            <input type="text" class="form-control" name="solocliente" id="solocliente"
+                                   placeholder="grantiaPersonalAval" required />
+                            <br />
+                            <label>Aval</label>
+                            <input type="text" class="form-control" name="grantiaPersonalAval" id="grantiaPersonalAval"
+                                   placeholder="grantiaPersonalAval" required />
+
+                            <br />
+                            <input type="submit" class="form-control btn btn-default" name="" id="productoFinForm" value="Crear Producto " />
+
+                        }
+                    </div>
+                </div>
+                <!-- { id = "productoFinForm" ,  -->
+            </div>
+        </div>
+
+
+
+
+
+        <hr />
+
+    </div>
+    <div class="col-lg-6 col-md-6">
+
+
+        <div class="card" style="padding:18px">
+            <div class="card-header"><h3>Productos financieros actuales</h3></div>
+            <div class="card-body">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <small>
+                            Tabla de Productos Financieros
+                        </small>
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-3">*</th>
+                                <th class="col-xs-3"></th>
+                                <th class="col-xs-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="creditos-T"></tbody>
+                    </table>
+                </div>
+
+                <hr />
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+<div class="col-lg-12" id="UNEdiv">
+
+
+    <h2>
+        Financiera Súmate UNE
+        de atención a usuarios
+    </h2>
+    <hr />
+</div>
+
+<div class="col-lg-6 col-md-6">
+    <div align="center">
+        <div class="card" style="padding:18px">
+            <div class="card-header" align="center"> <h3>Actualizar Documeto </h3></div>
+            <div class="card-body">
+                <form action="/DashboardAdmin/InsertUNE/" method="post" enctype="multipart/form-data">
+                    <label>Documento en PDF</label><br /><br />
+                    <input type="file" name="files" value="" required /><br />
+                    <input type="text" name="id_userCreated" id="" class="hidden" value="@User.Identity.GetUserId()" />
+
+                    <input type="submit" style="font-size:10pt" class="btn btn-default form-control" name="name" value="Actualizar" />
+                </form>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+</div>
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header">
+            <h3>
+                Financiera Súmate UNE
+                de atención a usuarios
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documento actual
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="UNE-T"></tbody>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<div class="col-lg-12">
+
+
+    <hr />
+
+</div>
+
+
+
+<div class="col-lg-12" id="InfoFinDiv">
+
+
+    <h2>Información Financiera </h2>
+    <hr />
+</div>
+<div class="col-lg-6 col-md-6" align="center">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"><h3>Agregar Documeto </h3></div>
+        <div class="card-body">
+            <form action="/dashboardadmin/InsertInformacionFinanciera" enctype="multipart/form-data" method="post">
+
+
+                <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+
+                <input class="form-control" type="file" name="files" value="" required /><br />
+                <select name="tipo" class="form-control" required>
+                    <option value="anual">Anual</option>
+                    <option value="trimestral">Trimestral</option>
+                    <option value="mensual">Mensual</option>
+                </select>
+                <br />
+
+                <hr />
+                <label>
+                    Correspondiente a la fecha
+                </label>
+                <br />
+                <input type="date" class="form-control" name="datecorresponde" value="" />
+
+
+                <br />
+                <input type="submit" style="font-size:10pt" class="form-control btn btn-default" name="name" value="Agregar documento" />
+
+            </form>
+        </div>
+    </div>
+
+
+</div>
+<div class="col-lg-6">
+
+
+    <div class="card" style="padding:18px">
+        <div class="card-header">
+            <h3>Anual</h3>
+        </div>
+        <div class="card-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documentos de información financiera anual
+                        <a href="/DashboardAdmin/Anuales/" class="btn btn-default pull-right">  <font size="2">  Ver Anuales</font> </a>Trimestrales
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="T-Anual"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6">
+
+
+    <div class="card" style="padding:18px">
+        <div class="card-header">
+            <h3>Trimestral</h3>
+        </div>
+        <div class="card-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documentos de información financiera Trimestral
+                        <a href="/DashboardAdmin/Trimestrales/" class="btn btn-default pull-right"><font size="2">  Ver Trimestrales</font></a>
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="T-Trimestral"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6 "></div>
+<div class="col-lg-6 ">
+
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"> <h3>Mensual</h3></div>
+        <div class="card-body">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documentos de información financiera Mensual
+                        <a href="/DashboardAdmin/mensuales/" class="btn btn-default pull-right"><font size="2">Ver Mensuales</font></a>
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="T-Mensual"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-12">
+
+    <hr />
+</div>
+
+<div class="row">
+    <div class="col-lg-12" id="carrouselDiv">
+        <h1>Objetos de carrousel</h1>
+    </div>
+    <div class="col-lg-6 col-md-6" col-md-6">
+
+        <div align="center">
+
+            <div class="card" style="padding:18px">
+                <div class="card-header"> <h3>Agregar item al slider</h3></div>
+                <div class="card-body">
+
+                    <form method="post" enctype="multipart/form-data" action="/DashboardAdmin/InsertItemCarrousel">
+                        <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+
+                        <img id="PreviewImage_itemCarousel" class="" width="180" height="240" src=""
+                             alt="Imagen de crédito" style="height:100px;" />
+
+                        <br>
+                        <input name="files" id="file_prodfin" onchange="readURL_itemCarousel(this);" type="file" required />
+                        <script>
+                            function readURL_itemCarousel(input) {
+                                if (input.files && input.files[0]) {//Check if input has files.
+                                    var reader = new FileReader(); //Initialize FileReader.
+                                    reader.onload = function (e) {
+                                        $('#PreviewImage_itemCarousel').attr('src', e.target.result);
+                                        $("#PreviewImage_itemCarousel").resizable({ aspectRatio: true, maxWidth: 300 });
+                                    };
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                                else {
+                                    $('#PreviewImage_itemCarousel').attr('src', "#");
+                                }
+                            }
+                        </script>                <label>Cabecera de slider</label><br />
+                        <input type="text" name="h2tag" class="form-control"
+                               placeholder="Cabecera Sumate Descuentos EJEMPLO" /><br />
+                        <label>complemento de slider</label><br />
+                        <input type="text" name="ptag" class="form-control"
+                               placeholder="Nuestros descuentos son de EJEMPLO" />
+                        <br />
+                        <input type="submit" class="form-control btn btn-default" name="" id=""
+                               value="Agregar Item de carrousel" style="font-size:10pt" />
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="col-lg-6 col-md-6">
+
+        <div class="card" style="padding:18px">
+            <div class="card-header"><h3>Carrousel <a href="carrousel/"  style="font-size:10pt"  class="btn btn-default pull-right">Ver carrousel</a></h3></div>
+            <div class="card-body">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            Tabla de item en el carrousel
+                        </h4>
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">#</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="Carrousel-t"></tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-lg-12" id="videosDiv">
+
+        <h2>Vídeos</h2>
+
+    </div>
+    <div class="col-lg-6 col-md-6" align="center">
+
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h2>Vídeos </h2>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("InsertVideoItem", "DashboardAdmin", FormMethod.Post))
+                {
+
+                    <input type="text" name="id_userCreated" id="" class="hidden" value="@User.Identity.GetUserId()" />
+                    <label>Categorías</label>
+                    <select name="datafilter" class="form-control" id="categoriasVideo-select"></select>
+
+                    <label>Link de youtube</label>
+                    <input type="url" class="form-control" name="urlyt" id="" placeholder="http://img.ejemplo.com/vi/ejemplo" required /><br />
+                    <label>Link de imagen youtube</label>
+                    <input type="url" class="form-control" name="imngurlyt" id="" placeholder="https://www.youtube.com/ejemplo" required /><br />
+
+
+                    <input type="submit" class="form-control btn btn-default " style="font-size:10pt" name="" id="" value="Guardar Video" />
+
+                }
+
+
+
+
+
+
+
+
+                <hr />
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <div class="col-lg-6 col-md-6">
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h4>Videos Actuales <a href="/dashboardadmin/videos"  style="font-size:10pt"  class="btn btn-default pull-right">Ver todos</a></h4>
+            </div>
+            <div class="card-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            Tabla de videos
+                        </h4>
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">#</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="Videos-t"></tbody>
+                    </table>
+                </div>
+
+
+
+
+                <hr />
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-6 col-md-6" align="center">
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h4>Agregar Categorías  </h4>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("InsertVideoCategoria", "DashboardAdmin", FormMethod.Post))
+                {
+
+                    <input type="text" name="id_userCreated" id="" class="hidden" value="@User.Identity.GetUserId()" />
+
+                    <input type="text" class="form-control" name="filterCategoria" id="" placeholder="nombre de categoria" required /><br />
+                    <input type="submit" class="form-control btn btn-default"  style="font-size:10pt" name="" id="" value="Crear categoría" />
+
+                }
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h4>Categorías Atuales</h4>
+            </div>
+            <div class="card-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            Tabla de categorías
+                        </h4>
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">#</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoriasVideo-t"></tbody>
+                    </table>
+                </div>
+
+
+                <hr />
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+<br />
+<div class="row">
+
+
+    <div class="col-lg-12" id="sucursalesDiv">
+
+        <h2>Sucursales</h2>
+        <hr />
+
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <div class="card" style="padding:18px">
+            <div class="card-header" align="center"> <h3>Agregar sucursal al mapa</h3></div>
+            <div class="card-body">
+
+                <form action="/DashboardAdmin/InsertSucursal/" method="post">
+                    <label>Nombre de sucursal</label><br />
+                    <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+                    <input type="text" class="form-control" name="sucursal" value="" placeholder="Sucursal Torreon" required /><br />
+                    <label>Longitud</label><br />
+                    <input type="text" class="form-control" name="longi" value="" placeholder="00.0000000" required /><br />
+                    <label>Latitud</label><br />
+                    <input type="text" class="form-control" name="lat" value="" placeholder="00.0000000" required /><br />
+
+                    <label>Telefono</label><br />
+                    <input type="text" class="form-control" name="telefono" value="" placeholder="55-55-5555" required /><br />
+                    <label>Dirección</label><br />
+                    <input type="text" class="form-control" name="direc" value="" placeholder="Zona Centro, Centro, 00000 Municpio, Edo." required /><br />
+
+                    <input type="submit" class="btn btn-default" style="font-size:10pt"  name="" value="Agregar sucursal" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h3>
+                    Sucursales Mapa Web
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            Ubicaciones <a href="mapa/"  style="font-size:10pt"  class="btn btn-default pull-right">Ver mapa</a>
+                        </h4>
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">#</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="sucursales-T"></tbody>
+                    </table>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-12">
+
+
+        <hr />
+
+    </div>
+
+
+    <div class="col-lg-12" id="promocionesDiv">
+
+
+        <h2>Promociones </h2>
+        <hr />
+    </div>
+    <div class="col-lg-6">
+
+
+        <div class="card" style="padding:18px">
+            <div class="card-header text-center">
+            </div>
+            <div class="card-body">
+                <form action="/dashboardadmin/InsertPromocion" method="post" enctype="multipart/form-data">
+
+                    <input type="text" name="id_userCreated" id="" class="hidden" value="@User.Identity.GetUserId()" />
+                    <label>Categorías</label>
+
+                    <label>Titulo</label>
+                    <input type="text" class="form-control" name="title" id="" placeholder="Descuentos de verano" required /><br />
+                    <input type="file" class="form-control" name="files" id="" required /><br />
+
+
+                    <input type="submit"  style="font-size:10pt"  class=" btn btn-default" name="" id="" value="Guardar Promoción" />
+                </form>
+
+
+
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+
+
+        <div class="card" style="padding:18px">
+            <div class="card-header"><h3>Promociones </h3></div>
+            <div class="card-body">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Promociones actuales   <a href="promociones/"  style="font-size:10pt"  class="pull-right btn btn-default">Ver Promociones</a></h3>
+
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">*</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="promociones-T"></tbody>
+                    </table>
+                </div>
+
+
+
+                <hr />
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+
+
+        <hr />
+    </div>
+
+    <div class="col-lg-12" id="misionvisiondiv">
+
+
+        <h2>Mision / Vision /  Datos de complemento </h2>
+        <hr />
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+        <div class="card" style="padding:18px">
+            <div class="card-body">
+
+                <div id="formMision"></div>
+
+
+                <hr />
+
+                <div id="dataMision"></div>
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+        <div class="card" style="padding:18px">
+            <div class="card-body">
+                <div id="formVision"></div>
+
+
+                <hr />
+
+                <div id="dataVision"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6 col-md-6">
+        <div class="card" style="padding:18px">
+            <div class="card-body">
+
+                <div id="formDatos"></div>
+
+                <hr />
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="col-lg-12">
+
+
+        <hr />
+    </div>
+
+
+    <div class="col-lg-12" id="BarrasDiv">
+
+
+        <h2>Edición de Barras </h2>   <div class="pull-right">
+            <a class="btn btn-default"  style="font-size:10pt"  data-toggle="collapse" href="#collapseBarras" aria-expanded="false" aria-controls="collapseExample">
+                Ver Barras
+            </a>
+
+        </div>
+
+        <hr />
+
+    </div>
+
+
+
+    <div class="col-lg-12">
+
+
+        <div>
+            <!-- / Collapse buttons -->
+            <!-- Collapsible element -->
+            <div class="collapse" id="collapseBarras">
+                <div class="mt-3">
+
+
+                    <section id="skills">
+                        <div class="container">
+
+                            <header class="section-header">
+                                <h3>Barras actuales</h3>
+
+                            </header>
+
+                            <div class="skills-content" id="barrasdiv">
+
+
+                            </div>
+
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+
+
+            <script>
+
+                (function ($) {
+                    "use strict";
+                    // Skills section
+                    $('#skills').waypoint(function () {
+                        $('.progress .progress-bar').each(function () {
+                            $(this).css("width", $(this).attr("aria-valuenow") + '%');
+                        });
+                    }, { offset: '80%' });
+
+                })(jQuery);
+            </script>
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-body">
+
+
+            <form action="/DashboardAdmin/InsertBarraItem/" method="post">
+
+                <label>Color</label><br />
+                <select name="color" class="form-control">
+                    <option value="bg-success">verde</option>
+                    <option value="bg-danger">rojo</option>
+                    <option value="bg-primary">azul</option>
+                    <option value="bg-secondary">morado</option>
+                    <option value="bg-warning">amarillo</option>
+                    <option value="bg-light">gris</option>
+                    <option value="bg-info">azul claro</option>
+                </select>
+                <br />
+                <label>Texto</label><br />
+                <input type="text" class="form-control" name="text" value="" required /><br />
+
+                <label>Valor</label><br />
+                <input type="number" max="100" min="5" class="form-control" name="valor" value="" required /><br />
+
+                <input type="submit" class="btn btn-default pull-right" name=""  style="font-size:10pt"  value="Agregar barra " />
+
+            </form>
+            <hr />
+
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="col-lg-6 col-md-6">
+    <div class="card" style="padding:18px">
+        <div class="card-body">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Barras actuales   </h3>
+
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">*</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="barras-T"></tbody>
+                </table>
+            </div>
+            <hr />
+
+
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+
+
+    <hr />
+</div>
+
+
+<div class="col-lg-12" id="contadores">
+
+    <h1>Contadores</h1>
+    <hr />
+</div>
+
+<div class="col-lg-6 col-md-6">
+
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div id="contadoresMessage"></div>
+
+            <form action="/DashboardAdmin/InsertCounters/" method="post">
+                <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                <label>Texto</label><br />
+                <input type="text" class="form-control" name="texto" value="" required /><br />
+
+
+                <label>Valor</label><br />
+                <input type="text" class="form-control" name="value" value="" required />
+                <br />
+                <input type="submit" style="font-size:10pt"  class="btn btn-default pull-right" name="name" id="contadorSubmit" value="Agregar" />
+                <hr />
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+<div class="col-lg-6 col-md-6">
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Contadores web   </h3>
+
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">*</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="contadores-T"></tbody>
+                </table>
+            </div>
+            <hr />
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="col-lg-12">
+
+
+    <hr />
+</div>
+<div class="col-lg-12" id="datoscontacto">
+
+    <h1>Datos de Contacto</h1>
+    <hr />
+</div>
+
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div id="DatosContactMessage"></div>
+
+            <form action="/DashboardAdmin/InsertDatosContacto" method="post">
+                <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                <label>direccion</label><br />
+                <input type="text" class="form-control" name="direccion" value="" required /><br />
+
+                <label>email</label><br />
+                <input type="text" class="form-control" name="email" value="" required />
+                <br />
+                <label>telefono</label><br />
+                <input type="text" class="form-control" name="telefono" value="" required />
+                <br />
+                <input type="submit"  style="font-size:10pt"  class="btn btn-default pull-right" name="name" id="DatosContactSubmit" value="Agregar" />
+                <hr />
+
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6 col-md-6">
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Datos de Contacto actuales   </h3>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-body" id="datosContact-T" style="padding:20px;">
+
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div class="col-lg-12">
+
+
+    <hr />
+</div>
+
+<div class="col-lg-12" id="anuncioCookies">
+
+    <h1>Anuncio de cookies</h1>
+    <hr />
+</div>
+
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div id="contadoresMessage"></div>
+
+            <form action="/DashboardAdmin/InsertAnuncioCookies" method="post" enctype="multipart/form-data">
+                <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" required />
+
+                <label>Imagen</label><br />
+                <input type="file" class="form-control" name="datafiles" value="" required /><br />
+
+
+                <label>Descripción</label><br />
+                <input type="text" class="form-control" name="descripcion" value="" required />
+                <br />
+                <input type="submit" 
+                        style="font-size:10pt" 
+                       class="btn btn-default pull-right" name="name" id="cookieSubmit" value="Agregar" />
+                <hr />
+
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6 col-md-6">
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+            <div id="CookiesJson-T"></div>
+
+            <hr />
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="col-lg-12">
+
+
+    <hr />
+</div>
+<div class="col-lg-12" id="beneficios">
+
+    <h1>Beneficios</h1>
+    <hr />
+</div>
+
+
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div id="BeneficiosMessage"></div>
+
+            <a href="/Beneficios/"  style="font-size:10pt"  class="btn btn-default pull-right">Ver todos</a>
+
+            <p align="center">
+                <input href="/DashboardAdmin/InsertBeneficios" type="button"
+                        style="font-size:10pt" 
+                       id="InsertBeneficios" class="btn btn-default" Value="Agregar"
+                       onclick="window.location.href='/DashboardAdmin/InsertBeneficios'" />
+            </p>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6 col-md-6">
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Beneficios actuales   </h3>
+
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">*</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="Beneficios-T"></tbody>
+                </table>
+            </div>
+            <hr />
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="col-lg-12">
+
+
+    <hr />
+</div>
+<div class="col-lg-12" id="valoresdelaempresa">
+    <h1>Valores de la empresa</h1>
+    <hr />
+
+</div>
+
+
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div id="ValoresMessage"></div>
+
+            <p align="center">
+                <input type="button"
+                       id="InBenef" class="btn btn-default" Value="Agregar"  style="font-size:10pt" 
+                       onclick="window.location.href='/DashboardAdmin/InsertValores'" />
+
+                <input type="button"
+                       id="EditBeneficios" class="btn btn-default" Value="Editar"  style="font-size:10pt" 
+                       onclick="window.location.href='/DashboardAdmin/EditValores'" />
+            </p>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Valores actuales   </h3>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Texto Actual  : <span id="textoHeader"></span>    </h3>
+
+                    </div>
+                    <div id="textoValores" style="padding:18px"></div>
+                </div>
+                <hr />
+            </div>
+            <hr />
+        </div>
+    </div>
+
+</div>
+
+<div class="col-lg-12" id="">
+
+
+    <hr />
+</div>
+
+
+
+<div class="col-lg-12" id="codigodeetica">
+    <h1>Código de ética</h1>
+    <hr />
+
+</div>
+
+
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div id="CodigoEticaMessage"></div>
+
+            <p align="center">
+                <input href="/DashboardAdmin/InsertBeneficios" type="button"
+                       id="Insertcodigodeetica" class="btn btn-default" Value="Agregar"   style="font-size:10pt" 
+                       onclick="window.location.href='/DashboardAdmin/InsertCodigoEtica'" />
+
+
+                <input href="/DashboardAdmin/EditBeneficios" type="button"
+                       id="Editcodigodeetica" class="btn btn-default" Value="Editar"  style="font-size:10pt" 
+                       onclick="window.location.href='/DashboardAdmin/EditCodigoDeEtica'" />
+            </p>
+
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Código de ética actuales   </h3>
+
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Texto Actual  : <span id="textoHeadercodigo"></span>    </h3>
+
+                    </div>
+                    <div id="CodigoEtico-T" style="padding:18px"></div>
+                </div>
+                <hr />
+            </div>
+            <hr />
+        </div>
+    </div>
+
+</div>
+
+<div class="col-lg-12" id="">
+
+
+    <hr />
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-header"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-lg-12" id="">
+
+
+    <hr />
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script>
+        $.ajax({
+            url: "/DashboardAdmin/ContactoDatosJson",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+
+
+                document.getElementById('datosContact-T').innerHTML +=
+                    `
+                    <p>
+                        <div>direccion</div>
+                        <div>${response[0].direccion}</div>
+
+                    </p>
+                    <p>
+                        <div>telefono</div>
+                        <div>${response[0].telefono}</div>
+                    </p>
+                    <p>
+                        <div>email</div>
+                        <div>${response[0].email}
+                        <a onclick="deleteDatosContacto(${response[0].id})"
+                        class="btn btn-danger pull-right"  style="font-size:10pt"  > Eliminar Datos </a>
+                        </div>
+
+                    </p>
+                    <p>
+                    </p>
+                `;
+
+
+                 //alert(response.length);
+                if (response.length > 0) {
+                    document.getElementById('DatosContactSubmit').disabled = true;
+                }
+            },
+            fail: function(jqXHR, textStatus, err)  {
+                //$('#myModalLabel').append(`error: - ${err}`);
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(err);
+
+                alert(err);
+
+            }
+        });
+
+
+    function deleteDatosContacto(id) {
+
+                     var idx = '@User.Identity.GetUserId()';
+
+                        document.getElementById('modal-header').innerHTML = 'Eliminar Contacto Datos ';
+                        document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar estos  Datos de Contacto?</h4>
+                        <form action="/DashboardAdmin/DeleteContactoDatos" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input  style="font-size:10pt"  type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+
+    }
+
+
+                $.ajax({
+                    url: "/DashboardAdmin/BarrasJSON",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+
+
+                        console.log(response)
+                        //alert(response);
+
+
+                        var resplength = response.length;
+
+
+                        for (let i = 0; i <= resplength; i++) {
+
+                            document.getElementById('barras-T').innerHTML +=
+                                `
+                                <tr>
+                                    <td class="col-xs-4">
+                                      <font size="3">  `+ response[i].valor + ` %</font>
+                                    </td>
+                                    <td class="col-xs-4"><font size="3">`+ response[i].text + `</font></td>
+                                    <td class="col-xs-4">
+
+                                        <a   style="font-size:10pt"  href="#" onclick="showDeleteBarra('`+ response[i].id + `')" class="btn btn-danger pull-right">Eliminar</a>
+                                    </td>
+                                </tr>
+                                `;
+                        }
+
+
+                    },
+
+                    error: function (jqXHR, textStatus, err) {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(jqXHR.responseJSON + "pordu");
+
+                    }
+
+                });
+                //barrasdiv
+                $.ajax({
+                    url: "/DashboardAdmin/BarrasJSON",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+
+
+                        console.log(response)
+                        //alert(response);
+
+
+                        var resplength = response.length;
+
+
+                        for (let i = 0; i <= resplength; i++) {
+
+                            document.getElementById('barrasdiv')
+                                .innerHTML += `
+
+                                    <div class="progress">
+                                        <div class="progress-bar `+ response[i].color + `" role="progressbar" aria-valuenow="` + response[i].valor + `" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="skill">`+ response[i].text + `<i class="val">` + response[i].valor + `%</i></span>
+                                        </div>
+
+                                    </div>
+
+
+                                    `;
+                        }
+                    },
+
+                    error: function (jqXHR, textStatus, err) {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(jqXHR.responseJSON + "pordu");
+
+                    }
+
+                });
+
+                function showDeleteBarra(id) {
+                     var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar documento Barra';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar está Barra?</h4>
+                        <form action="/DashboardAdmin/DeleteBarra" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input   style="font-size:10pt" type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+                }
+ 
+    function readURL(input) {
+        if (input.files && input.files[0]) {//Check if input has files.
+            var reader = new FileReader(); //Initialize FileReader.
+            reader.onload = function (e) {
+                $('#PreviewImage').attr('src', e.target.result);
+                $("#PreviewImage").resizable({ aspectRatio: true, maxWidth: 300 });
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+        else {
+            $('#PreviewImage').attr('src', "#");
+        }
+    }
+
+                $.ajax({
+                    url: "/DashboardAdmin/UNEListJson",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+
+
+                        console.log(response)
+                        //alert(response);
+
+
+                        var resplength = response.length;
+
+
+                        for (let i = 0; i <= resplength; i++) {
+
+                                                      var DateString = response[i].created_at;
+                        var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                                var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                        //Al hacer lo anterior obtenemos 1567618700920
+                        var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                        //Por lo tanto DT ya es una fecha
+
+                        //Creamos una variable month y obtenemos el mes +1
+                        var month = dt.getMonth() + 1;
+                        //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                        var monthString = month > 9 ? month : '0' + month;
+                        //Obtenemos el dia
+                        var day = dt.getDate();
+                        //Aplicamos lo mismo que con el mes
+                        var dayString = day > 9 ? day : '0' + day;
+                        //Obtenemos el año
+                        var year = dt.getFullYear();
+                        shortDate = monthString + '-' + dayString + '-' + year;
+                            document.getElementById('UNE-T').innerHTML += `
+                                                 <tr>
+                                                    <td class="col-xs-4"><font size="3">`+ response[i].id + ` </font></td>
+                                                    <td class="col-xs-4"><font size="3">`+ shortDate + ` </font></td>
+                                                    <td class="col-xs-4"><a href="`+ response[i].path + `"  style="font-size:10pt"  download class="btn btn-default">Ver</a>
+                                                        <a href="#"  style="font-size:10pt"  onclick="showDeleteUNE(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                                </tr>
+                                                `;
+                        }
+
+
+                    },
+
+                    error: function (jqXHR, textStatus, err) {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(err);
+
+                    }
+
+                });
+
+
+                function showDeleteUNE(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar documento UNE';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar está UNE?</h4>
+                        <form action="/DashboardAdmin/DeleteUNE" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input  style="font-size:10pt"  type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+            }
+
+
+
+             $.ajax({
+                url: "/DashboardAdmin/JSONPromociones",
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+
+
+                    console.log(response)
+                    //alert(response);
+
+
+                    var resplength = response.length;
+
+
+                    for (let i = 0; i <= resplength; i++) {
+
+                        document.getElementById('promociones-T')
+                            .innerHTML += `
+                               <tr>
+                                <td class="col-xs-4">
+                                 <font size="3">   `+ response[i].title + `</font>
+                                </td>
+                                <td class="col-xs-4"> </td>
+                                <td class="col-xs-4">
+                                <a href="`+ response[i].path + `"  style="font-size:10pt"  download class="btn btn-default">Ver</a>
+                                    <a href="#"  style="font-size:10pt"  onclick="showDeletePromocion('`+ response[i].id + `')" class="btn btn-danger pull-right">Eliminar</a>
+                                </td>
+                            </tr>
+                            `;
+
+
+
+                    }
+
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(jqXHR.responseJSON + "pordu");
+
+                }
+
+             });
+
+
+
+            function showDeletePromocion(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar Producto Financiero Credito';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar el este producto financiero?</h4>
+                        <form action="/DashboardAdmin/DeletePromocion" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+
+                            <input type="submit" class="btn btn-danger"  style="font-size:10pt"  name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+            }
+
+
+
+    $.ajax({
+        url: "/DashboardAdmin/JsonValores",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+               
+            var rl = response.length;
+            console.log(response.length);
+          
+            if (response.length == 1) {
+
+
+
+                $('#InBenef').prop('disabled', true);
+
+
+                document.getElementById('textoValores').innerHTML +=
+                    `
+                        <a class="btn btn-default form-control"  style="font-size:10pt"  data-toggle="collapse" href="#collapseValores" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          ver
+                        </a>
+                        <div class="collapse" id="collapseValores">
+                                        ${response[0].texto}</div>
+                                    `;
+
+
+                document.getElementById('textoHeader').innerHTML +=
+                    `
+                                        ${response[0].textoHead}
+                                    `;
+
+            } else if (response.length == 0) {
+                $('#EditBeneficios').prop('disabled', true);
+
+            }
+
+
+
+            //alert(response.length);
+
+        },
+        fail: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(err);
+
+        }
+    });
+
+
+
+    $.ajax({
+        url: "/DashboardAdmin/JsonCodigoEtico",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            var rl = response.length;
+
+
+
+            //alert(response.length);
+            if (response.length == 1) {
+
+
+
+                $('#Insertcodigodeetica').prop('disabled', true);
+
+
+                document.getElementById('CodigoEtico-T').innerHTML +=
+                    `
+                       <a class="btn btn-default form-control"  style="font-size:10pt"  data-toggle="collapse" href="#collapseCodigo" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                         Ver
+                                    </a>
+                                    <div class="collapse" id="collapseCodigo">
+                                    ${response[0].texto}</div>`;
+                document.getElementById('textoHeadercodigo').innerHTML +=
+                    `
+                                    ${response[0].textoHead}
+                                `;
+
+            } else if (response.length == 0) {
+                $('#Editcodigodeetica').prop('disabled', true);
+
+            }
+        },
+        fail: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(err);
+
+        }
+    });
+
+
+                        $.ajax({
+                            url: "/DashboardAdmin/InfoFinAnualListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+
+
+                                    var DateString = response[i].created_at;
+                                    var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                                    var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                                    //Al hacer lo anterior obtenemos 1567618700920
+                                    var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                                    //Por lo tanto DT ya es una fecha
+
+                                    //Creamos una variable month y obtenemos el mes +1
+                                    var month = dt.getMonth() + 1;
+                                    //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                                    var monthString = month > 9 ? month : '0' + month;
+                                    //Obtenemos el dia
+                                    var day = dt.getDate();
+                                    //Aplicamos lo mismo que con el mes
+                                    var dayString = day > 9 ? day : '0' + day;
+                                    //Obtenemos el año
+                                    var year = dt.getFullYear();
+                                    shortDate = monthString + '-' + dayString + '-' + year;
+                                    document.getElementById('T-Anual').innerHTML += `
+                                         <tr>
+                                            <td class="col-xs-4"><font size="3">`+ response[i].id + `</font></td>
+                                            <td class="col-xs-4"><font size="3">`+ shortDate + `</font></td>
+                                            <td class="col-xs-4"><a href="`+ response[i].path + `" download class="btn btn-default">
+                                                    Ver
+                                                    </a>
+                                                <a href="#"  style="font-size:10pt"  onclick="showDeleteAnual(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                        </tr>
+                                        `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+
+
+
+                        function showDeleteAnual(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar información financiera Trimestral?';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este documento de información financiera Anual?</h4>
+                        <form action="/DashboardAdmin/DeleteAnualInfoFin" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input type="submit" class="btn btn-danger" style="font-size:10pt"  name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+
+
+        //CountersJSON
+
+                    $.ajax({
+                    url: "/DashboardAdmin/CountersJSON",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+                        console.log(response)
+                        var resplength = response.length;
+
+                        if (resplength == 4) {
+                            document.getElementById('contadoresMessage').innerHTML = 'YA EXISTEN 4 Contadores';
+                            document.getElementById('contadorSubmit').disabled = true;
+                        }
+                        for (let i = 0; i <= resplength; i++) {
+
+                        //
+                            document.getElementById('contadores-T').innerHTML += `
+                                                 <tr>
+                                                    <td class="col-xs-4"> <font size="3">`+ response[i].text + `</td> </font>
+                                                    <td class="col-xs-4"> <font size="3">`+response[i].value  + `  </td> </font>
+                                                    <td class="col-xs-4">
+                                                        <a href="#"  style="font-size:10pt"  onclick="showDeleteCounter(`+ response[i].id + `)" class="btn btn-danger pull-right">Eliminar</a></td>
+                                                </tr>
+                                                `;
+                        }
+                    },
+                    error: function (jqXHR, textStatus, err) {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(err);
+
+                    }
+                    });
+
+                    function showDeleteCounter(id) {
+                     var idx = '@User.Identity.GetUserId()';
+
+                        document.getElementById('modal-header').innerHTML = 'Eliminar documento Counter';
+                        document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar está Counter?</h4>
+                        <form action="/DashboardAdmin/DeleteCounter" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input type="submit" class="btn btn-danger" style="font-size:10pt"  name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+                }
+
+
+             $.ajax({
+                url: "/DashboardAdmin/ProductosFinancierosListJson",
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+
+
+                    console.log(response)
+                    //alert(response);
+
+
+                    var resplength = response.length;
+
+
+                    for (let i = 0; i <= resplength; i++) {
+                        document.getElementById('creditos-T').innerHTML += `
+                                 <tr style="padding: 5%">
+                                <td class="col-xs-3"> <font size="1">`+ response[i].title + `</font> </td>
+                                 <td class="col-xs-3"> </td>  <td class="col-xs-3"> </td>
+                                <td class="col-xs-3">
+                                <a href="/ProductoFinanciero/Details/`+ response[i].id + `" class="btn btn-default pull-right"  style="font-size:10pt" >Editar</a>
+                                </td>
+
+                    </tr>
+                            `;
+                    }
+                    /*
+                         <a href="#" onclick="showDeleteProductoFinanciero('`+ response[i].id + `')" class="btn btn-danger">Eliminar</a>
+                     */
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(jqXHR.responseJSON + "pordu");
+
+                }
+
+             });
+
+
+
+            function showDeleteProductoFinanciero(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar Producto Financiero Credito';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar el este producto financiero?</h4>
+                        <form action="/DashboardAdmin/DeleteProductosFinanciero" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+
+                            <input type="submit" style="font-size:10pt"  class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+            }
+
+
+    $.ajax({
+        url: "/DashboardAdmin/InfoFinTrimestralListJson",
+        type: "GET",
+        dataType: "json",
+        //contentType: "application/json; charset=utf-8",
+
+        success: function (response) {
+
+
+            console.log(response)
+            //alert(response);
+
+
+            var resplength = response.length;
+
+
+            for (let i = 0; i <= resplength; i++) {
+
+                var DateString = response[i].created_at;
+                var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                //Al hacer lo anterior obtenemos 1567618700920
+                var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                //Por lo tanto DT ya es una fecha
+
+                //Creamos una variable month y obtenemos el mes +1
+                var month = dt.getMonth() + 1;
+                //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                var monthString = month > 9 ? month : '0' + month;
+                //Obtenemos el dia
+                var day = dt.getDate();
+                //Aplicamos lo mismo que con el mes
+                var dayString = day > 9 ? day : '0' + day;
+                //Obtenemos el año
+                var year = dt.getFullYear();
+                shortDate = monthString + '-' + dayString + '-' + year;
+
+                document.getElementById('T-Trimestral').innerHTML += `
+                    <tr>
+                    <td class="col-xs-4"><font size="3">`+ response[i].id + ` </font></td>
+                    <td class="col-xs-4"><font size="3">`+ shortDate + ` </font></td>
+                    <td class="col-xs-4"><a href="`+ response[i].path + `" download  style="font-size:10pt"  class="btn btn-default">  Ver </a>
+                        <a href="#"  style="font-size:10pt"  onclick="showDeleteTrimestral(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                `;
+            }
+
+
+        },
+
+        error: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(err + 'err');
+
+        }
+
+    });
+
+                        $.ajax({
+                            url: "/DashboardAdmin/InfoFinMensualListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+
+                                    var DateString = response[i].created_at;
+                                    var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                                    var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                                    //Al hacer lo anterior obtenemos 1567618700920
+                                    var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                                    //Por lo tanto DT ya es una fecha
+
+                                    //Creamos una variable month y obtenemos el mes +1
+                                    var month = dt.getMonth() + 1;
+                                    //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                                    var monthString = month > 9 ? month : '0' + month;
+                                    //Obtenemos el dia
+                                    var day = dt.getDate();
+                                    //Aplicamos lo mismo que con el mes
+                                    var dayString = day > 9 ? day : '0' + day;
+                                    //Obtenemos el año
+                                    var year = dt.getFullYear();
+                                    shortDate = monthString + '-' + dayString + '-' + year;
+                                    document.getElementById('T-Mensual').innerHTML += `
+                                         <tr>
+                                            <td class="col-xs-4"><font size="3">`+ response[i].id + `</font></td>
+                                            <td class="col-xs-4"><font size="3">`+ shortDate + `</font></td>
+                                            <td class="col-xs-4"><a href="`+ response[i].path + `"  style="font-size:10pt"  download class="btn btn-default"> Ver </a>
+                                                <a href="#"  style="font-size:10pt"  onclick="showDeleteMensual(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                        </tr>
+                                        `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+                        function showDeleteMensual(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar información financiera Mensual?';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este documento de información financiera Mensual?</h4>
+                        <form action="/DashboardAdmin/DeleteMensualInfoFin" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input type="submit" class="btn btn-danger" style="font-size:10pt"  name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+                $.ajax({
+                    url: "/DashboardAdmin/UNEListJson",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+
+
+                        console.log(response)
+                        //alert(response);
+
+
+                        var resplength = response.length;
+
+
+                        for (let i = 0; i <= resplength; i++) {
+
+                                                      var DateString = response[i].created_at;
+                        var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                                var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                        //Al hacer lo anterior obtenemos 1567618700920
+                        var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                        //Por lo tanto DT ya es una fecha
+
+                        //Creamos una variable month y obtenemos el mes +1
+                        var month = dt.getMonth() + 1;
+                        //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                        var monthString = month > 9 ? month : '0' + month;
+                        //Obtenemos el dia
+                        var day = dt.getDate();
+                        //Aplicamos lo mismo que con el mes
+                        var dayString = day > 9 ? day : '0' + day;
+                        //Obtenemos el año
+                        var year = dt.getFullYear();
+                        shortDate = monthString + '-' + dayString + '-' + year;
+                            document.getElementById('UNE-T').innerHTML += `
+                                                 <tr>
+                                                    <td class="col-xs-4"> <font size="3"> `+ response[i].id + `</font></td>
+                                                    <td class="col-xs-4"> <font size="3"> `+ shortDate + `</font></td>
+                                                    <td class="col-xs-4"><a href="`+ response[i].path + `" download class="btn btn-default"  style="font-size:10pt" >  Ver </a>
+                                                        <a href="#"  style="font-size:10pt"  onclick="showDeleteUNE(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                                </tr>
+                                                `;
+                        }
+
+
+                    },
+
+                    error: function (jqXHR, textStatus, err) {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(err);
+
+                    }
+
+                });
+
+
+                function showDeleteUNE(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar documento UNE';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar está UNE?</h4>
+                        <form action="/DashboardAdmin/DeleteUNE" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input type="submit"  style="font-size:10pt" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+            }
+
+
+                    $.ajax({
+                        url: `/DashboardAdmin/VisionJSON`,
+                        type: "GET",
+                        dataType: "json",
+                        //contentType: "application/json; charset=utf-8",
+
+                        success: function (response) {
+                           // alert('mision');
+                            var resplen = response.length;
+                            if (resplen > 0) {
+
+
+                                document.getElementById('formVision').innerHTML = `
+                                     <form action="/DashboardAdmin/UpdateMision" enctype="multipart/form-data" method="post" id=""  >
+                                    <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                                    <label>Vision</label><br />
+                                    <small>Datos actuales</small><br />
+                                    <img src="${response[0].img}" width="100px" alt="Alternate Text" /><br />
+                                    <input type="file" class="form-control" name="files" value=""  required/>
+                                    <br />
+
+                                    <input type="text" class="form-control" placeholder="Descripción" name="text" value="${response[0].text}" required /><br />
+
+                                      <br />
+                                    <input  style="font-size:10pt"  type="submit" class="btn btn-default pull-right" name="name" value="Actualizar" />
+                                    <input  style="font-size:10pt"  type="button" onclick="DeleteVision(${response[0].id})" class="btn btn-danger pull-right" name="" value="Eliminar" />
+
+                                </form>`;
+
+                            } else {
+
+
+                                document.getElementById('formVision').innerHTML = `
+
+                                <form action="/DashboardAdmin/InsertVission" enctype="multipart/form-data" method="post" id=""  >
+                                    <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                                    <label>Vision</label><br />
+                                    <input type="file" class="form-control" name="files" value="" required />
+                                    <input type="submit" class="btn btn-default pull-right" name="name"  style="font-size:10pt"  value="Insertar" />
+                                    <br />
+                                    <input type="text" class="form-control" placeholder="Descripción" name="text" value="" required/><br />
+
+                                    </form>  `;
+
+                               // document.getElementById('dataVision').innerHTML = `${response.id} `;
+
+                            }
+                        },
+
+                        error: function (jqXHR, textStatus, err) {
+                            //$('#myModalLabel').append(`error: - ${err}`);
+                            console.log(jqXHR);
+                            console.log(textStatus);
+                            console.log(err);
+
+                            alert(err);
+
+                        }
+
+                    });
+
+
+                    function DeleteVision(id) {
+
+        var idx = '@User.Identity.GetUserId()';
+                             document.getElementById('modal-header').innerHTML = 'Eliminar Vision de página principal';
+                                    document.getElementById('modal-body').innerHTML = `
+                                            <div align="center">
+                                             <h4>¿Estás seguro que deseas eliminar está Vision?</h4>
+                                            <form action="/DashboardAdmin/DeleteVision" method="post">
+                                                <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                                                <input type="text" class="hidden" name="id" value="`+ id +`" />
+                                                <input   style="font-size:10pt" type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                                            </form>
+
+                                            </div>
+                                    `;
+
+
+                                    $("#exampleModal").modal("show");
+                        }
+
+
+
+
+                        $.ajax({
+                        url: `/DashboardAdmin/DatosExtraJSON`,
+                        type: "GET",
+                        dataType: "json",
+                        //contentType: "application/json; charset=utf-8",
+
+                        success: function (response) {
+                           // alert('mision');
+                            var resplen = response.length;
+                            if (resplen > 0) {
+
+
+                                document.getElementById('formDatos').innerHTML = `
+                                     <form action="/DashboardAdmin/UpdateExtraData" enctype="multipart/form-data" method="post" id=""  >
+                                    <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                                    <label> Extras</label><br />
+                                    <small>Datos actuales</small><br />
+                                    <img src="${response[0].img}" width="100px" alt="Alternate Text" /><br />
+                                    <input type="file" class="form-control" name="files" value="" required />
+                                    <br />
+
+                                    <input type="text" class="form-control" placeholder="Descripción" name="text" value="${response[0].text}" required /><br />
+
+                                      <br />
+                                    <input type="submit"  style="font-size:10pt"  class="btn btn-default pull-right" name="name" value="Actualizar" />
+                                    <input type="button"  style="font-size:10pt"  onclick="DeleteDatosExtra(${response[0].id})" class="btn btn-danger pull-right" name="" value="Eliminar" />
+
+                                </form>`;
+
+                            } else {
+
+
+                                document.getElementById('formDatos').innerHTML = `
+
+                                <form action="/DashboardAdmin/InsertExtraData" enctype="multipart/form-data" method="post" id=""  >
+                                    <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                                    <label>Extras</label><br />
+                                    <input type="file" class="form-control" name="files" value="" />
+                                    <input type="submit"  style="font-size:10pt"  class="btn btn-default pull-right" name="name" value="Insertar" required />
+                                    <br />
+                                    <input type="text" class="form-control" placeholder="Descripción" name="text" value="" required/><br />
+
+                                    </form>  `;
+
+                             //   document.getElementById('dataDatos').innerHTML = `${response.id} `;
+
+                            }
+                        },
+
+                        error: function (jqXHR, textStatus, err) {
+                            //$('#myModalLabel').append(`error: - ${err}`);
+                            console.log(jqXHR);
+                            console.log(textStatus);
+                            console.log(err);
+
+                            alert(err);
+
+                        }
+
+                    });
+        function DeleteDatosExtra(id) {
+
+        var idx = '@User.Identity.GetUserId()';
+                             document.getElementById('modal-header').innerHTML = 'Eliminar Datos extra de página principal';
+                                    document.getElementById('modal-body').innerHTML = `
+                                            <div align="center">
+                                             <h4>¿Estás seguro que deseas eliminar está Datos extra?</h4>
+                                            <form action="/DashboardAdmin/DeleteDatosExtra" method="post">
+                                                <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                                                <input type="text" class="hidden" name="id" value="`+ id +`" />
+                                                <input type="submit"  style="font-size:10pt"  class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                                            </form>
+
+                                            </div>
+                                    `;
+
+
+                                    $("#exampleModal").modal("show");
+                        }
+
+
+                    $.ajax({
+                        url: `/DashboardAdmin/MisionJSON`,
+                        type: "GET",
+                        dataType: "json",
+                        //contentType: "application/json; charset=utf-8",
+
+                        success: function (response) {
+                           // alert('mision');
+                            var resplen = response.length;
+                            if (resplen > 0) {
+
+
+                                document.getElementById('formMision').innerHTML = `
+                                     <form action="/DashboardAdmin/UpdateMision" enctype="multipart/form-data" method="post" id=""  >
+                                    <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                                    <label>Mision</label><br />
+                                    <small>Datos actuales</small><br />
+                                    <img src="${response[0].img}" width="100px" alt="Alternate Text" /><br />
+                                    <input type="file" class="form-control" name="files" value="" required />
+
+                                    <br />
+                                    <input type="text" class="form-control" placeholder="Descripción" name="text" value="${response[0].text}"  required /><br />
+
+                                      <br />
+                                      <input type="submit"  style="font-size:10pt"  class="btn btn-default pull-right" name="name" value="Actualizar" />
+                                    <input type="button"  style="font-size:10pt"  onclick="DeleteMision(${response[0].id})" class="btn btn-danger pull-right" name="" value="Eliminar" />
+
+                                </form>`;
+
+                            } else {
+
+
+                                document.getElementById('formMision').innerHTML = `
+
+                                <form action="/DashboardAdmin/InsertMission" enctype="multipart/form-data" method="post" id=""  >
+                                    <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+
+                                    <label>Mision</label><br />
+                                    <input type="file" class="form-control" name="files" value="" required />
+                                    <input type="submit"   style="font-size:10pt" class="btn btn-default pull-right" name="name" value="Insertar" />
+                                    <br />
+                                    <input type="text" class="form-control" placeholder="Descripción" name="text" value="" required /><br />
+
+                                    </form>  `;
+
+                                document.getElementById('dataMision').innerHTML = `${response.id} `;
+
+                            }
+                        },
+
+                        error: function (jqXHR, textStatus, err) {
+                            //$('#myModalLabel').append(`error: - ${err}`);
+                            console.log(jqXHR);
+                            console.log(textStatus);
+                            console.log(err);
+
+                            alert(err);
+
+                        }
+
+                    });
+
+
+                    function DeleteMision(id) {
+
+        var idx = '@User.Identity.GetUserId()';
+
+                             document.getElementById('modal-header').innerHTML = 'Eliminar Mision de página principal';
+                            document.getElementById('modal-body').innerHTML = `
+                                    <div align="center">
+                                     <h4>¿Estás seguro que deseas eliminar está Mision?</h4>
+                                    <form action="/DashboardAdmin/DeleteMision" method="post">
+                                        <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                                        <input type="text" class="hidden" name="id" value="`+ id +`" />
+                                        <input type="submit"  style="font-size:10pt"  class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                                    </form>
+
+                                    </div>
+                            `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+                        $.ajax({
+                            url: "/DashboardAdmin/sucursalesListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+                                    document.getElementById('sucursales-T').innerHTML += `
+                                                 <tr>
+                                                    <td class="col-xs-4"> <font size="3"> `+ response[i].id + ` </font></td>
+                                                    <td class="col-xs-4"> <font size="3"> `+ response[i].sucursal + ` </font></td>
+                                                    <td class="col-xs-4">
+                                                        <a  style="font-size:10pt"  href="#" onclick="showDeletSucursal(`+ response[i].id + `)" class="btn btn-danger pull-right">Eliminar</a></td>
+                                                </tr>
+                                                `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+
+
+                        function showDeletSucursal(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar Sucursal?';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar esta sucursal del mapa ?</h4>
+                        <form action="/DashboardAdmin/DeleteSucursal" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input  style="font-size:10pt"  type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+
+                        $.ajax({
+                            url: "/DashboardAdmin/VideosCategoriasListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+                                    document.getElementById('categoriasVideo-t').innerHTML += `
+                                         <tr>
+                                            <td class="col-xs-4"> <font size="3">`+ response[i].id + ` </font> </td>
+                                            <td class="col-xs-4"> <font size="3">`+ response[i].filterCategoria + ` </font> </td>
+                                            <td class="col-xs-4">
+                                                <a href="#"  style="font-size:10pt"  onclick="showDeleteCategoria(`+ response[i].id + `, '` + response[i].filterCategoria + `')" class="btn btn-danger pull-right">Eliminar</a></td>
+                                        </tr>
+                                        `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+
+
+                        function showDeleteCategoria(id, filterCategoria) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar Categoría';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar está categoría?</h4>
+                        <form action="/DashboardAdmin/DeleteVideoCategoria" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input type="text" class="hidden" name="filterCategoria" value="`+ filterCategoria + `" />
+                            <input type="submit"  style="font-size:10pt"  class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+
+                        $.ajax({
+                            url: "/DashboardAdmin/CarrouselItemsListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+                                    document.getElementById('Carrousel-t').innerHTML += `
+                                             <tr>
+                                                <td class="col-xs-4"> <img src="`+ response[i].img + `" height="20px" alt="Alternate Text" /></td>
+                                                <td class="col-xs-4"> <font size="2">`+ response[i].h2tag + ` </font></td>
+                                                <td class="col-xs-4"><a href="" onclick="" class="btn btn-default"  style="font-size:10pt" >  Ver </a>
+                                                    <a href="#"   style="font-size:10pt" onclick="showDeleteCarrouselItem(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                            </tr>
+                                            `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+
+
+                        function showDeleteCarrouselItem(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar Carrousel Item';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este Carrousel Item?</h4>
+                        <form action="/DashboardAdmin/DeleteCarrousellItem" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input   style="font-size:10pt" type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+
+
+
+
+                        $.ajax({
+                            url: "/DashboardAdmin/VideosListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log("videos: ------------ " + response);
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+                                    document.getElementById('Videos-t').innerHTML += `
+                                                                 <tr>
+                                                                    <td class="col-xs-4"><font size="3">`+ response[i].id + `</font></td>
+                                                                    <td class="col-xs-4"><font size="3">`+ response[i].datafilter + `</font></td>
+                                                                    <td class="col-xs-4">
+
+                                                                    <a href="#"  style="font-size:10pt"  onclick="showDeleteVideolItem(`+ response[i].id + `)" class="btn btn-danger pull-right">Eliminar</a>
+                                                                    </td>
+                                                                </tr>
+                                                                `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+                        function showDeleteVideolItem(id) {
+
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar Video Item';
+                            document.getElementById('modal-body').innerHTML = `
+                                    <div align="center">
+                                     <h4>¿Estás seguro que deseas eliminar está Video ?</h4>
+                                    <form action="/DashboardAdmin/DeleteVideoYT" method="post">
+                                        <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                                        <input type="text" class="hidden" name="id" value="`+ id + `" />
+                                        <input  style="font-size:10pt"  type="submit" class="btn btn-danger " name="name" value="Si estoy seguro, eliminar" />
+
+                                    </form>
+
+                                    </div>
+                            `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+
+
+    $.ajax({
+            url: "/DashboardAdmin/CookiesJson",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+
+
+                document.getElementById('CookiesJson-T').innerHTML +=
+                    `
+                    <p>
+                         <img class="img-responsive" src="${response[0].path}" alt="Alternate Text" />
+                    </p>
+                    <p>
+                        <div>Descripción</div>
+                        <div>${response[0].descripcion}</div>
+                    </p>
+                     <p>
+                    <a  style="font-size:10pt"  onclick="deleteCookieAvios(${response[0].id})" class="btn btn-danger pull-right"  >Eliminar</a>
+                     </p>
+                `;
+
+
+                 //alert(response.length);
+                if (response.length > 0) {
+                    document.getElementById('cookieSubmit').disabled = true;
+                }
+            },
+            fail: function(jqXHR, textStatus, err)  {
+                //$('#myModalLabel').append(`error: - ${err}`);
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(err);
+
+                alert(err);
+
+            }
+    });
+
+
+    function deleteCookieAvios(id) {
+                        var idx = '@User.Identity.GetUserId()';
+                        document.getElementById('modal-header').innerHTML = 'Eliminar Aviso de Cookies ';
+                        document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar estos  Aviso de Cookies ?</h4>
+                        <form action="/DashboardAdmin/DeleteCookiesAviso" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input   style="font-size:10pt" type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+                        </form>
+                        </div>`;
+                $("#exampleModal").modal("show");
+    }
+
+    $.ajax({
+        url: "/DashboardAdmin/VideosCategoriasListJson",
+        type: "GET",
+        dataType: "json",
+        //contentType: "application/json; charset=utf-8",
+
+        success: function (response) {
+            console.log(response)
+            //alert(response);
+            var resplength = response.length;
+            for (let i = 0; i <= resplength; i++) {
+                document.getElementById('categoriasVideo-select').innerHTML += `
+                                                                                                                                                                                                                                                                                                                                                                <option value="`+ response[i].filterCategoria + `">` + response[i].filterCategoria +
+                    `</option> `;
+            }
+        },
+
+        error: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+            alert(err + 'err');
+        }
+    });
+</script>
+<script src="~/Scripts/AdminDataGet.js"></script>

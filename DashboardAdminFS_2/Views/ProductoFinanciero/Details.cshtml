@@ -1,0 +1,782 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Details";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<div class="container">
+
+    <div class="row top7 " align="center">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+
+            <form action="/ProductoFinanciero/UpdateProductoFinanciero" method="post" enctype="multipart/form-data">
+
+
+               
+                <table class="table table animated fadeIn " id="T-edit">
+             
+
+                    <thead>
+                        <tr>
+
+                            <th class="th-sm">Editar campos</th>
+                            <th>
+                                <small>Asegurate de no dejar elementos vacios</small>
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody id="">
+                        <tr class="hidden">
+                            <td>
+                                <input type="text" name="id_userCreated" value=" @User.Identity.GetUserId()" />
+                                <input type="text" name="id" value="@ViewBag.Id" />
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                <a onclick="editarCall()" class="btn btn-danger">Cancelar</a>
+                            </td>
+                            <td>
+                                <input type="submit" class="btn btn-success pull-right form-control" value="Editar" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Titulo</td>
+
+                            <td class="col-xs-3">
+                                <input type="text" class="form-control" name="title" value="" />
+                            </td>
+                        </tr>
+
+
+
+
+                        <tr>
+                            <td class="col-xs-3">
+
+                                <img src="" name="img" height="100px" alt="Alternate Text" /><br />
+                                <span name="imgurl"> </span>
+
+                            </td>
+
+                            <td class="col-xs-3">
+                                <input type="file" class="form-control" name="files" value="" />
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">
+
+                                Monto máximo autorizado
+
+                            </td>
+
+                            <td class="col-xs-3">
+                                <input type="text" class="form-control" name="montoCredito" value="" />
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">Descripcion</td>
+
+                            <td class="col-xs-3">
+                                <textarea class="form-control" placeholder="..." name="descripcion"></textarea>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Plazo Minimo</td>
+
+                            <td class="col-xs-3"><input type="text" class="form-control" name="plazoMinimo" value="" /> </td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Plazo Maximo</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="plazoMaximo" value="" /> </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Plazo Maximo de Semanas</td>
+
+                            <td class="col-xs-3"><input type="text" class="form-control" name="lapMaxSemanas" value="" /> </td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Plazo Minimo de Semanas</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="lapMinSemanas" value="" /> </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">Frecuencias De Pago</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="frecuenciasDePago" value="" /> </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Esquema De Cobro</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="esquemaDeCobro" value="" /> </td>
+
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">Requisitos</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="requisitos" value="" /> </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">TasaDeInteres</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="tasaDeInteres" value="" /> </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">CAT</td>
+
+                            <td class="col-xs-3"><input type="text" class="form-control" name="CAT" value="" /> </td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Esquema DeCobro</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="esquemaDeCobro" value="" /> </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">Rango de edad</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="edad" value="" /> </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="col-xs-3">Apto para</td>
+
+                             
+                            <td class="col-xs-3"><input type="text" class="form-control" name="soloclientes" value="" /> </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">Tipo de crédito</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="tipocredito" value="" /> </td>
+
+
+                        </tr>
+
+
+                        <tr>
+                            <td class="col-xs-3">Tecnología crediticia</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="tencologiaCrediticia" value="" /> </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">Integrantes</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="numeroDeIntegrantes" value="" /> </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">tipoRetornoPagoSemanal</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="tipoRetornoPagoSemanal" value="" /> </td>
+
+
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">tipoRetornoPagoCatorcenal</td>
+
+                            <td class="col-xs-3"><input type="text" class="form-control" name="tipoRetornoPagoCatorcenal" value="" /> </td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">tipoRetornoPago28Dias</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="tipoRetornoPago28Dias" value="" /> </td>
+
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="col-xs-3">tipoRetornoPago28Dias</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="tipoRetornoPago28Dias" value="" /> </td>
+
+
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Garantía persona aval</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="grantiaPersonalAval" value="" /> </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3">Otras comisones</td>
+                            <td class="col-xs-3"><input type="text" class="form-control" name="otrasComisones" value="" /> </td>
+
+
+                        </tr>
+
+                        
+
+
+                    </tbody>
+
+
+
+                </table>
+
+
+            </form>
+        </div>
+        <script>
+
+
+             $.ajax({
+                url: "/ProductoFinanciero/JSONINFO/@ViewBag.Id",
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+            success: function (response) {
+
+                console.log(response)
+                var resplength = response.id;
+
+                var tencologiaCrediticia =  $('[name="tencologiaCrediticia"]');
+                tencologiaCrediticia = tencologiaCrediticia.val(response.tencologiaCrediticia);
+
+                var montoCredito = $('[name="montoCredito"]');
+                montoCredito = montoCredito.val(response.montoCredito);
+
+                var title = $('[name="title"]');
+                title = title.val(response.title);
+
+                var imgView = $('[name="img"]');
+                imgView = imgView.attr('src', response.img);
+
+                var spanimg = $('[name="imgurl"]');
+                spanimg = spanimg.innerHTML = ' ruta actual: ' + response.img;
+
+                var descripcion = $('[name="descripcion"]');
+                descripcion = descripcion.val(response.descripcion);
+
+                var plazoMinimo = $('[name="plazoMinimo"]');
+                plazoMinimo = plazoMinimo.val(response.plazoMinimo);
+
+
+                var plazoMaximo = $('[name="plazoMaximo"]');
+                plazoMaximo = plazoMaximo.val(response.plazoMaximo);
+
+                var id_userCreated = $('[name="id_userCreated"]');
+                id_userCreated = id_userCreated.val(response.id_userCreated);
+
+
+                var id  = $('[name="id"]');
+                id = id.val(response.id);
+
+
+                var lapMaxSemanas  = $('[name="lapMaxSemanas"]');
+                lapMaxSemanas = lapMaxSemanas.val(response.lapMaxSemanas);
+
+                var lapMinSemanas = $('[name="lapMinSemanas"]');
+                lapMinSemanas = lapMinSemanas.val(response.lapMinSemanas);
+
+                var frecuenciasDePago = $('[name="frecuenciasDePago"]');
+                frecuenciasDePago = frecuenciasDePago.val(response.frecuenciasDePago);
+
+                var esquemaDeCobro = $('[name="esquemaDeCobro"]');
+                esquemaDeCobro = esquemaDeCobro.val(response.esquemaDeCobro);
+
+                var requisitos = $('[name="requisitos"]');
+                requisitos = requisitos.val(response.requisitos);
+
+                var tasaDeInteres = $('[name="tasaDeInteres"]');
+                tasaDeInteres = tasaDeInteres.val(response.tasaDeInteres);
+
+                
+                var CAT = $('[name="CAT"]');
+                CAT = CAT.val(response.CAT);
+
+                var tipocreditox = 
+                 $('[name="tipocredito"]');
+                tipocreditox = tipocreditox.val(response.tipocredito);
+
+
+                
+                var esquemaDeCobro = $('[name="esquemaDeCobro"]');
+                esquemaDeCobro = esquemaDeCobro.val(response.esquemaDeCobro);
+
+                
+                var edad = $('[name="edad"]');
+                edad = edad.val(response.edad);
+                               
+                var soloclientes = $('[name="soloclientes"]');
+                soloclientes = soloclientes.val(response.soloclientes);
+                               
+                var numeroDeIntegrantes = $('[name="numeroDeIntegrantes"]');
+                numeroDeIntegrantes = numeroDeIntegrantes.val(response.numeroDeIntegrantes);
+                               
+                var tipoRetornoPagoSemanal = $('[name="tipoRetornoPagoSemanal"]');
+                tipoRetornoPagoSemanal = tipoRetornoPagoSemanal.val(response.tipoRetornoPagoSemanal);
+                               
+                var tipoRetornoPagoCatorcenal = $('[name="tipoRetornoPagoCatorcenal"]');
+                tipoRetornoPagoCatorcenal = tipoRetornoPagoCatorcenal.val(response.tipoRetornoPagoCatorcenal);
+                               
+                var tipoRetornoPago28Dias = $('[name="tipoRetornoPago28Dias"]');
+                tipoRetornoPago28Dias = tipoRetornoPago28Dias.val(response.tipoRetornoPago28Dias);
+                               
+                var otrasComisones = $('[name="otrasComisones"]');
+                otrasComisones = otrasComisones.val(response.otrasComisones);
+
+               
+                 var grantiaPersonalAval = $('[name="grantiaPersonalAval"]');
+                grantiaPersonalAval = grantiaPersonalAval.val(response.grantiaPersonalAval);
+
+
+
+
+
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(err);
+
+                }
+
+        });
+
+        </script>
+    </div>
+    <div class="col-lg-2"></div>
+
+
+    <div class="row">
+        <div id="credito-T">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-header"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $.ajax({
+                url: "/ProductoFinanciero/JSONINFO/@ViewBag.Id",
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+            success: function (response) {
+
+                    //console.log(response)
+                    //alert(response);
+
+
+                var resplength = response.id;
+
+
+
+                        document.getElementById('credito-T')
+                            .innerHTML = `
+
+                             <div class="col-lg-12">
+                                        <h3>`+ response.title + `</h3>
+                                         <div id="infoUserDiv"></div>
+                                    </div>
+                            <div class="col-lg-6 col-md-6">
+                                <img src="`+ response.img + `" height="100px" alt="Alternate Text" />
+                                <h4>`+ response.title + `</h4>
+
+
+                                    <input value="`+ response.id_userCreated + `" class="hidden" id="useridSess"/>
+                                        <div id="">
+                                          <table id="user-T"></table>
+                                        </div>
+
+
+                                    <div class="card" style="padding:18px">
+                                        <div class="card-body" align="center">
+                                            <form action="/ProductoFinanciero/InsertInteres/" method="post">
+
+                                                Ageregar Interés
+
+                                                <input type="text" name="id_user" value=" @User.Identity.GetUserId()" class="hidden" />
+                                                <input type="text" name="id_producto" value="@ViewBag.Id" class="hidden"/>
+                                                <input type="text" name="name" value="`+ response.title + `" class="hidden"/>
+
+                                                <label>Porcetaje %</label>
+                                                <input type="text" name="interes" value="" class="form-control" required/>
+                                                <input type="submit" class="form-control btn btn-default" name="name" value="Agregar" />
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <br />
+                                    <div class="card" style="padding:18px">
+                                        <div class="card-body">
+
+                                            <h2>Intereses de este crédito</h2>
+                                           <table class="table">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">#</th>
+                                                  <th scope="col"></th>
+                                                  <th scope="col"></th>
+                                                </tr>
+                                              </thead>
+                                              <tbody id="interese-T">
+
+                                              </tbody>
+                                            </table>
+
+                                </div>
+                                    </div>
+                                </div>
+                                    <div class="col-lg-6 col-md-6">
+
+                                    <table class="table table animated fadeIn"  id="T-info" >
+                                        <thead>
+                                            <tr>
+
+                                                <th class="th-sm">#</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="">
+                                            <tr>
+                                                <td class="col-xs-3">Titulo</td>
+
+                                                <td class="col-xs-3">`+ response.title + `</td>
+                                            </tr>
+                                              <tr>
+                                                <td class="col-xs-3">Imagen</td>
+
+                                                <td class="col-xs-3">
+                                                   <img src="`+ response.img + `" height="100px" alt="Alternate Text" /><br/>
+                                                `+ response.img + `</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Descripcion</td>
+
+                                                    <td class="col-xs-3">`+ response.descripcion + ` días</td>
+
+                                                </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Plazo Minimo</td>
+
+                                                    <td class="col-xs-3">`+ response.plazoMinimo + ` días</td>
+
+                                                </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Plazo Maximo</td>
+
+                                                    <td class="col-xs-3">`+ response.plazoMaximo + `</td>
+
+                                                </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Plazo Maximo de Semanas</td>
+
+                                                    <td class="col-xs-3">`+ response.lapMaxSemanas + `</td>
+
+                                                </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Plazo Minimo de Semanas</td>
+
+                                                    <td class="col-xs-3">`+ response.lapMinSemanas + `</td>
+
+                                                </tr>
+
+                                            <tr>
+                                                <td class="col-xs-3">Frecuencias De Pago</td>
+
+                                                    <td class="col-xs-3">`+ response.frecuenciasDePago + `</td>
+
+                                                </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Esquema De Cobro</td>
+
+                                                    <td class="col-xs-3">`+ response.esquemaDeCobro + `</td>
+
+                                                </tr>
+
+                                            <tr>
+                                                <td class="col-xs-3">Requisitos</td>
+
+                                                    <td class="col-xs-3">`+ response.requisitos + `</td>
+
+                                                </tr>
+
+                                            <tr>
+                                                <td class="col-xs-3">TasaDeInteres</td>
+
+                                                    <td class="col-xs-3">`+ response.tasaDeInteres + `</td>
+
+                                                </tr>
+
+                                            <tr>
+                                                <td class="col-xs-3">CAT</td>
+
+                                                    <td class="col-xs-3">`+ response.CAT + `</td>
+
+                                                </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Esquema DeCobro</td>
+
+                                                    <td class="col-xs-3">`+ response.esquemaDeCobro + `</td>
+
+                                           </tr>
+
+                                            <tr>
+                                                <td class="col-xs-3">Rango de edad</td>
+
+                                                    <td class="col-xs-3">`+ response.edad + ` años</td>
+
+                                           </tr>
+
+
+                                            <tr>
+                                                <td class="col-xs-3">Apto para</td>
+
+                                                    <td class="col-xs-3">`+ response.soloclientes + ` años</td>
+
+                                           </tr>
+                                            <tr>
+                                                <td class="col-xs-3">Integrantes</td>
+
+                                                    <td class="col-xs-3">`+ response.numeroDeIntegrantes + ` años</td>
+
+                                           </tr>
+
+                                            <tr>
+                                                <td class="col-xs-3">tipoRetornoPagoSemanal</td>
+
+                                                    <td class="col-xs-3">`+ response.tipoRetornoPagoSemanal + ` años</td>
+
+                                           </tr>
+                                            <tr>
+                                                <td class="col-xs-3">tipoRetornoPagoCatorcenal</td>
+
+                                                    <td class="col-xs-3">`+ response.tipoRetornoPagoCatorcenal + ` años</td>
+
+                                           </tr>
+                                            <tr>
+                                                <td class="col-xs-3">tipoRetornoPago28Dias</td>
+
+                                                    <td class="col-xs-3">`+ response.tipoRetornoPago28Dias + ` años</td>
+
+                                           </tr>
+                                            <tr>
+                                                <td class="col-xs-3">otrasComisones</td>
+
+                                                    <td class="col-xs-3">`+ response.otrasComisones + ` años</td>
+
+                                           </tr>
+
+                                             <tr>
+                                                </td>
+                                                    <a onclick="editarCall()" class="btn btn-default">Editar</a>
+                                                    </td>
+                                                </td>
+                                                    <a  onclick="showDeleteProductoFinanciero('`+ response.id + `')" class="btn btn-danger pull-right">Eliminar</a>
+                                                    </td>
+                                               </tr>
+
+
+                                        </tbody>
+
+
+
+                                    </table>
+
+
+
+                                </div>
+
+                            </div>
+
+                                `;
+                callUserdata();
+
+
+
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(err);
+
+                }
+
+        });
+
+        function editarCall() {
+
+                if($("#T-info").is(":visible")){
+
+                    $("#T-info").hide();
+                    $("#T-edit").show();
+                    $(".T-edit").show();
+                } else{
+                    $("#T-edit").hide();
+                    $(".T-edit").hide();
+
+                    $("#T-info").show();
+
+                }
+          
+        }
+            function showDeleteProductoFinanciero(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar información financiera Mensual?';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este documento de información financiera Mensual?</h4>
+                        <form action="/DashboardAdmin/DeleteProductosFinanciero" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+                $("#exampleModal").modal("show");
+        }
+            function callUserdata() {
+            var idsess = $('#useridSess').val();
+
+
+        $.ajax({
+                url: "/ProductoFinanciero/JSONInteres/"+@ViewBag.Id,
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+            success: function (response) {
+                var resplength = response.length;
+                if (resplength) {
+
+                    for (let i = 0; i <= resplength; i++) {
+                        var n = i ;
+                        document.getElementById('interese-T').innerHTML += `
+                                <tr>
+                                  <th scope="row">`+ n + `</th>
+                                  <td><span>`+ response[i].interes + ` %</span> </td>
+                                  <td><a class="btn btn-danger pull-right" onclick="showDeleteInteres(`+ response[i].id + `)">Eliminar</a></td>
+                                </tr>
+
+                        `;
+                    }
+                } else {
+
+                        document.getElementById('interese-T').innerHTML = `
+                                <tr>
+                                  <th scope="row"> 1 </th>
+                                  <td><span>`+ response.interes + ` %</span> </td>
+                                  <td><a class="btn btn-danger pull-right" onclick="showDeleteInteres(`+ response.id + `)">Eliminar</a></td>
+                                </tr>`;
+
+
+                }
+
+
+                //infoUserDiv
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(err+"intereses");
+
+                }
+
+        });
+
+        }
+            function showDeleteInteres(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar interes ';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este interes ?</h4>
+                        <form action="/DashboardAdmin/DeleteInteres" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+                $("#exampleModal").modal("show");
+        }
+
+        
+
+
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    $("#T-edit").hide();
+    $(".T-edit").hide();    
+});
+
+                 
+
+    </script>
+

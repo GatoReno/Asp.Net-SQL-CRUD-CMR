@@ -1,0 +1,54 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+#skills {
+    padding: 60px 0;
+}
+
+    #skills .progress {
+        height: 35px;
+        margin-bottom: 10px;
+    }
+
+        #skills .progress .skill {
+            font-family: "Open Sans", sans-serif;
+            line-height: 35px;
+            padding: 0;
+            margin: 0 0 0 20px;
+            text-transform: uppercase;
+        }
+
+            #skills .progress .skill .val {
+                float: right;
+                font-style: normal;
+                margin: 0 20px 0 0;
+            }
+
+    #skills .progress-bar {
+        width: 1px;
+        text-align: left;
+        transition: .9s;
+    }

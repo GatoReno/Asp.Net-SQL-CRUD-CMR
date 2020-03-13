@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Beneficios";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <h3>Beneficios Actuales</h3>
+    </div>
+</div>
+<div class="row" id="holder">
+    
+</div>
+
+<script>
+        $.ajax({
+            url: "/DashboardAdmin/BeneficiosJson/",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                var rl = response.length;
+
+                for (var i = 0; i < rl; i++) {
+                       document.getElementById('holder').innerHTML +=
+                        `
+                    <div class="col-lg-4 box">
+                            <p class="description"> ${response[i].id}</p>
+                            <font size="12"><i class="${response[i].icono}"></i></font> ${response[i].icono}
+                            <p class="description"> ${response[i].texto}</p>
+                        </div>                       
+                    `;
+                }
+            },
+            fail: function(jqXHR, textStatus, err)  {
+                //$('#myModalLabel').append(`error: - ${err}`);
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(err);
+                alert(err);
+
+            }
+        });
+
+</script>

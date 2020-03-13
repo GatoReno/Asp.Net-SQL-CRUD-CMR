@@ -1,0 +1,108 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Mapa";
+
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUSWbri5yyzK1kh1lEj9fxX21WyM3Gaow&callback=initMap"
+        async defer></script>
+<style>
+    #map {
+        height: 100%;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .top10 {
+        margin-top: 10%;
+    }
+</style>
+<h2 class="top10">Mapa</h2>
+
+
+<div class="col-lg-12">
+
+    <div id="map"></div>
+
+
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 7,
+                center: new google.maps.LatLng(19.053430, -98.223228),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+
+            var sucursalesOBJ;
+            $.ajax({
+                url: "/DashboardAdmin/sucursalesListJson",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    sucursalesOBJ = response
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+                    alert(err + ': carrousel');
+                }
+            }).then(() => {
+
+                let contentString = "";
+                let infowindow = [], marker = [];
+                for (i = 0; i < sucursalesOBJ.length; i++) {
+
+
+                    contentString = '<div id=" ">' +
+                        '<div id="siteNotice">' +
+                        '</div>' +
+                        '<h1 id="firstHeading" class="firstHeading">' + sucursalesOBJ[i].sucursal + '</h1>' +
+                        '<div id="bodyContent">' +
+
+                        '<p>Telefono : ' + sucursalesOBJ[i].telefono + '</p > ' +
+                        '<p>Dirección : ' + sucursalesOBJ[i].direccion + '</p > ' +
+
+                        '</div>' +
+                        '</div>';
+
+                    let marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(sucursalesOBJ[i].longitud, sucursalesOBJ[i].latitud),
+                        map: map
+                    });
+
+                    let infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+                    google.maps.event.addListener(marker, 'click', function () {
+
+                        infowindow.open(map, marker);
+                    });
+
+
+                }
+            });
+
+
+
+        }
+
+        initMap();
+
+    </script>
+
+</div>
+
+

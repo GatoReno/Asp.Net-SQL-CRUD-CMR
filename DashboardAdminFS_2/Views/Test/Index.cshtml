@@ -1,0 +1,148 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<button class="btn btn-default pull-right" onclick="EditYeah()">Yeah</button>
+
+
+<h2>Testing</h2>
+<script src="~/Scripts/editor.js" defer></script>
+<script defer>
+    $(document).ready(function () {
+        $("#txtEditorEdit").Editor();
+    });
+
+</script>
+
+
+<div class="row">
+
+    <div class="container">
+        <div class="col-lg-6 col-md-6">
+            <div class="card" style="padding:18px">
+                <div class="card-header"></div>
+                <div class="card-body">
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Contadores financieros actuales   </h3>
+
+                        </div>
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-4">*</th>
+                                    <th class="col-xs-4"></th>
+                                    <th class="col-xs-4"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="CodigoEtico-T"></tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    <div class="panel panel-default" style="padding:18px" id="textV">
+                        <form action="/DashboardAdmin/EditCodigoDeEtica" method="post">
+                            <input type="submit" class="btn btn-default pull-right" onclick="" value="Actualizar" />
+                            <button class="btn btn-default pull-right" onclick="EditYeah()">Yeah</button>
+                            <input type="text" class="" id="id_val" name="id_valor" value="" />
+                            <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+                            <div class="row">
+
+
+                                <div class="col-lg-12 nopadding">
+                                    <label>Cabecera</label><br />
+                                    <input type="text" id="textoHeadEdit" name="textoHead" class="form-control" required />
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label>Texto</label><br />
+                                </div>
+
+                                <div class="col-lg-12 nopadding">
+                                    <div id="errorTxt">
+
+                                    </div>
+                                    <textarea id="txtEditorEdit" name="txtEditorEdit" required></textarea>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+
+
+
+    function EditYeah() {
+        let val1 = $('[name="textoHead"]');
+        let val2 = $('.Editor-editor');
+        let id_valor = $('#id_val');
+        let id_UC = $('#id_userCreated');
+
+        let data = {
+            textoHead: val1[0].value,
+            txtEditorEdit: val2[0].innerHTML,
+            id_valor: id_valor.value,
+            id_userCreated: id_UC.value
+        }
+
+        if (data.textoHead === 0) {
+            $('#textoHeadEdit').focus();
+
+        }
+
+
+        else if (data.txtEditorEdit === 0) {
+            $('.Editor-editor').focus();
+            $('#errorTxt').innerHTML('Caja de texto vacia');
+        } else {
+          $.ajax({
+                     url: "/dashboardadmin/EditValores",
+                     type: "POST",
+                     data: data,
+                     success: function (response) {
+                          alert("yeah");
+
+                     },
+                     fail: function(jqXHR, textStatus, err)  {
+                         //$('#myModalLabel').append(`error: - ${err}`);
+                         console.log(jqXHR);
+                         console.log(textStatus);
+                         console.log(err);
+
+                         alert(err);
+
+                     }
+          }); 
+
+            }
+    }
+
+
+
+</script>

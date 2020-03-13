@@ -1,0 +1,1215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FSADMINModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminBitacora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="250" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="action" Type="varchar" MaxLength="250" />
+          <Property Name="comments" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contactos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="head" Type="varchar(max)" />
+          <Property Name="th1" Type="varchar(max)" />
+          <Property Name="th2" Type="varchar(max)" />
+          <Property Name="img" Type="varchar(max)" />
+          <Property Name="destino" Type="varchar" MaxLength="50" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" />
+          <Property Name="oculto" Type="varchar" MaxLength="20" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HomeAnuncioCookies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="350" />
+          <Property Name="descripcion" Type="varchar" MaxLength="350" />
+        </EntityType>
+        <EntityType Name="HomeBarras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="150" />
+          <Property Name="valor" Type="int" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HomeBeneficios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="texto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="icono" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HomeCarrouselItems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="img" Type="varchar" MaxLength="250" />
+          <Property Name="h2tag" Type="varchar" MaxLength="250" />
+          <Property Name="ptag" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HomeCodigoDeEtica">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="texto" Type="nvarchar(max)" />
+          <Property Name="textoHead" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HomeContactoDatos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="350" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HomeCostosComisiones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="250" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="250" />
+          <Property Name="created_at" Type="date" />
+        </EntityType>
+        <EntityType Name="HomeCounters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="150" />
+          <Property Name="value" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HomeDatosExtra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="350" />
+          <Property Name="img" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="HomeInfoFinanciera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="date" Nullable="false" />
+          <Property Name="lastupdate" Type="date" Nullable="false" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="250" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" />
+          <Property Name="path" Type="varchar" MaxLength="250" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="day" Type="int" />
+        </EntityType>
+        <EntityType Name="HomeMision">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="350" />
+          <Property Name="img" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="HomeProductosFinancieros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="150" />
+          <Property Name="descripcion" Type="varchar" MaxLength="350" />
+          <Property Name="montoCredito" Type="varchar" MaxLength="150" />
+          <Property Name="plazoMinimo" Type="int" />
+          <Property Name="plazoMaximo" Type="int" Nullable="false" />
+          <Property Name="frecuenciasDePago" Type="varchar" MaxLength="150" />
+          <Property Name="esquemaDeCobro" Type="varchar" MaxLength="150" />
+          <Property Name="requisitos" Type="varchar" MaxLength="150" />
+          <Property Name="tasaDeInteres" Type="varchar" MaxLength="150" />
+          <Property Name="CAT" Type="varchar" MaxLength="350" />
+          <Property Name="created_at" Type="date" />
+          <Property Name="lastupdate" Type="date" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="150" />
+          <Property Name="img" Type="varchar" MaxLength="150" />
+          <Property Name="tipocredito" Type="varchar" MaxLength="50" />
+          <Property Name="tencologiaCrediticia" Type="varchar" MaxLength="150" />
+          <Property Name="lapMaxSemanas" Type="int" />
+          <Property Name="lapMinSemanas" Type="int" />
+          <Property Name="tipoRetornoPagoSemanal" Type="varchar" MaxLength="150" />
+          <Property Name="tipoRetornoPagoCatorcenal" Type="varchar" MaxLength="150" />
+          <Property Name="tipoRetornoPago28Dias" Type="varchar" MaxLength="150" />
+          <Property Name="otrasComisones" Type="varchar" MaxLength="350" />
+          <Property Name="numeroDeIntegrantes" Type="int" />
+          <Property Name="grantiaPersonalAval" Type="varchar" MaxLength="150" />
+          <Property Name="edad" Type="varchar" MaxLength="150" />
+          <Property Name="soloclientes" Type="varchar" MaxLength="50" />
+          <Property Name="costoTotalAnualCredito" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HomePromociones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="350" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HomeSucursales">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="longitud" Type="varchar" MaxLength="150" />
+          <Property Name="latitud" Type="varchar" MaxLength="150" />
+          <Property Name="sucursal" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="direccion" Type="varchar" MaxLength="350" />
+        </EntityType>
+        <EntityType Name="HomeUNE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="date" Nullable="false" />
+          <Property Name="lastupdate" Type="date" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="150" />
+          <Property Name="path" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="HomeValores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="texto" Type="nvarchar(max)" />
+          <Property Name="textoHead" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HomeVideoCategorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="filterCategoria" Type="varchar" MaxLength="150" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HomeVideoITems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urlyt" Type="varchar" MaxLength="250" />
+          <Property Name="imngurlyt" Type="varchar" MaxLength="250" />
+          <Property Name="datafilter" Type="varchar" MaxLength="50" />
+          <Property Name="id_userCreated" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HomeVision">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="350" />
+          <Property Name="img" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ProductoFinancieroInteres">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_productofinanciero" Type="int" Nullable="false" />
+          <Property Name="interes" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TestingT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_UserCreated" Type="varchar" MaxLength="50" />
+          <Property Name="val1" Type="varchar" MaxLength="50" />
+          <Property Name="val2" Type="varchar" MaxLength="50" />
+          <Property Name="val3" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FSADMINModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminBitacora" EntityType="Self.AdminBitacora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contactos" EntityType="Self.Contactos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeAnuncioCookies" EntityType="Self.HomeAnuncioCookies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeBarras" EntityType="Self.HomeBarras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeBeneficios" EntityType="Self.HomeBeneficios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeCarrouselItems" EntityType="Self.HomeCarrouselItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeCodigoDeEtica" EntityType="Self.HomeCodigoDeEtica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeContactoDatos" EntityType="Self.HomeContactoDatos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeCostosComisiones" EntityType="Self.HomeCostosComisiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeCounters" EntityType="Self.HomeCounters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeDatosExtra" EntityType="Self.HomeDatosExtra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeInfoFinanciera" EntityType="Self.HomeInfoFinanciera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeMision" EntityType="Self.HomeMision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeProductosFinancieros" EntityType="Self.HomeProductosFinancieros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomePromociones" EntityType="Self.HomePromociones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeSucursales" EntityType="Self.HomeSucursales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeUNE" EntityType="Self.HomeUNE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeValores" EntityType="Self.HomeValores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeVideoCategorias" EntityType="Self.HomeVideoCategorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeVideoITems" EntityType="Self.HomeVideoITems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeVision" EntityType="Self.HomeVision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoFinancieroInteres" EntityType="Self.ProductoFinancieroInteres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestingT" EntityType="Self.TestingT" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FSADMINModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminBitacora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_userCreated" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="action" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="comments" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
+        </EntityType>
+        <EntityType Name="Contactos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="head" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="th1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="th2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="destino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="oculto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeAnuncioCookies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="path" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeBarras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="Int32" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeBeneficios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="texto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="icono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeCarrouselItems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="img" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="h2tag" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ptag" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_userCreated" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeCodigoDeEtica">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="texto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="textoHead" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeContactoDatos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeCostosComisiones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="id_userCreated" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="HomeCounters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="value" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeDatosExtra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeInfoFinanciera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="lastupdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_userCreated" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="day" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HomeMision">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeProductosFinancieros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="montoCredito" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="plazoMinimo" Type="Int32" />
+          <Property Name="plazoMaximo" Type="Int32" Nullable="false" />
+          <Property Name="frecuenciasDePago" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="esquemaDeCobro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="requisitos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tasaDeInteres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CAT" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="0" />
+          <Property Name="lastupdate" Type="DateTime" Precision="0" />
+          <Property Name="id_userCreated" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tipocredito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tencologiaCrediticia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="lapMaxSemanas" Type="Int32" />
+          <Property Name="lapMinSemanas" Type="Int32" />
+          <Property Name="tipoRetornoPagoSemanal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tipoRetornoPagoCatorcenal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tipoRetornoPago28Dias" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="otrasComisones" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="numeroDeIntegrantes" Type="Int32" />
+          <Property Name="grantiaPersonalAval" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="soloclientes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="costoTotalAnualCredito" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomePromociones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="path" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeSucursales">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="longitud" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="latitud" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="sucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeUNE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="lastupdate" Type="DateTime" Precision="0" />
+          <Property Name="id_userCreated" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeValores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="texto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="textoHead" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeVideoCategorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="filterCategoria" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="id_userCreated" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeVideoITems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urlyt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imngurlyt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="datafilter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_userCreated" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HomeVision">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductoFinancieroInteres">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_productofinanciero" Type="Int32" Nullable="false" />
+          <Property Name="interes" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TestingT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_UserCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="val1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="val2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="val3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBEnt" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AdminBitacora" EntityType="Self.AdminBitacora" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Contactos" EntityType="Self.Contactos" />
+          <EntitySet Name="HomeAnuncioCookies" EntityType="Self.HomeAnuncioCookies" />
+          <EntitySet Name="HomeBarras" EntityType="Self.HomeBarras" />
+          <EntitySet Name="HomeBeneficios" EntityType="Self.HomeBeneficios" />
+          <EntitySet Name="HomeCarrouselItems" EntityType="Self.HomeCarrouselItems" />
+          <EntitySet Name="HomeCodigoDeEtica" EntityType="Self.HomeCodigoDeEtica" />
+          <EntitySet Name="HomeContactoDatos" EntityType="Self.HomeContactoDatos" />
+          <EntitySet Name="HomeCostosComisiones" EntityType="Self.HomeCostosComisiones" />
+          <EntitySet Name="HomeCounters" EntityType="Self.HomeCounters" />
+          <EntitySet Name="HomeDatosExtra" EntityType="Self.HomeDatosExtra" />
+          <EntitySet Name="HomeInfoFinanciera" EntityType="Self.HomeInfoFinanciera" />
+          <EntitySet Name="HomeMision" EntityType="Self.HomeMision" />
+          <EntitySet Name="HomeProductosFinancieros" EntityType="Self.HomeProductosFinancieros" />
+          <EntitySet Name="HomePromociones" EntityType="Self.HomePromociones" />
+          <EntitySet Name="HomeSucursales" EntityType="Self.HomeSucursales" />
+          <EntitySet Name="HomeUNE" EntityType="Self.HomeUNE" />
+          <EntitySet Name="HomeValores" EntityType="Self.HomeValores" />
+          <EntitySet Name="HomeVideoCategorias" EntityType="Self.HomeVideoCategorias" />
+          <EntitySet Name="HomeVideoITems" EntityType="Self.HomeVideoITems" />
+          <EntitySet Name="HomeVision" EntityType="Self.HomeVision" />
+          <EntitySet Name="ProductoFinancieroInteres" EntityType="Self.ProductoFinancieroInteres" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TestingT" EntityType="Self.TestingT" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FSADMINModelStoreContainer" CdmEntityContainer="DBEnt">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="FSADMINModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminBitacora">
+            <EntityTypeMapping TypeName="FSADMINModel.AdminBitacora">
+              <MappingFragment StoreEntitySet="AdminBitacora">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="action" ColumnName="action" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="FSADMINModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="FSADMINModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="FSADMINModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="FSADMINModel.AspNetUserRoles">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="FSADMINModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contactos">
+            <EntityTypeMapping TypeName="FSADMINModel.Contactos">
+              <MappingFragment StoreEntitySet="Contactos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="head" ColumnName="head" />
+                <ScalarProperty Name="th1" ColumnName="th1" />
+                <ScalarProperty Name="th2" ColumnName="th2" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="destino" ColumnName="destino" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="oculto" ColumnName="oculto" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeAnuncioCookies">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeAnuncioCookies">
+              <MappingFragment StoreEntitySet="HomeAnuncioCookies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeBarras">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeBarras">
+              <MappingFragment StoreEntitySet="HomeBarras">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="color" ColumnName="color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeBeneficios">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeBeneficios">
+              <MappingFragment StoreEntitySet="HomeBeneficios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="texto" ColumnName="texto" />
+                <ScalarProperty Name="icono" ColumnName="icono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeCarrouselItems">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeCarrouselItems">
+              <MappingFragment StoreEntitySet="HomeCarrouselItems">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="h2tag" ColumnName="h2tag" />
+                <ScalarProperty Name="ptag" ColumnName="ptag" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeCodigoDeEtica">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeCodigoDeEtica">
+              <MappingFragment StoreEntitySet="HomeCodigoDeEtica">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="texto" ColumnName="texto" />
+                <ScalarProperty Name="textoHead" ColumnName="textoHead" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeContactoDatos">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeContactoDatos">
+              <MappingFragment StoreEntitySet="HomeContactoDatos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeCostosComisiones">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeCostosComisiones">
+              <MappingFragment StoreEntitySet="HomeCostosComisiones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeCounters">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeCounters">
+              <MappingFragment StoreEntitySet="HomeCounters">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeDatosExtra">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeDatosExtra">
+              <MappingFragment StoreEntitySet="HomeDatosExtra">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeInfoFinanciera">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeInfoFinanciera">
+              <MappingFragment StoreEntitySet="HomeInfoFinanciera">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeMision">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeMision">
+              <MappingFragment StoreEntitySet="HomeMision">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeProductosFinancieros">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeProductosFinancieros">
+              <MappingFragment StoreEntitySet="HomeProductosFinancieros">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="montoCredito" ColumnName="montoCredito" />
+                <ScalarProperty Name="plazoMinimo" ColumnName="plazoMinimo" />
+                <ScalarProperty Name="plazoMaximo" ColumnName="plazoMaximo" />
+                <ScalarProperty Name="frecuenciasDePago" ColumnName="frecuenciasDePago" />
+                <ScalarProperty Name="esquemaDeCobro" ColumnName="esquemaDeCobro" />
+                <ScalarProperty Name="requisitos" ColumnName="requisitos" />
+                <ScalarProperty Name="tasaDeInteres" ColumnName="tasaDeInteres" />
+                <ScalarProperty Name="CAT" ColumnName="CAT" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="tipocredito" ColumnName="tipocredito" />
+                <ScalarProperty Name="tencologiaCrediticia" ColumnName="tencologiaCrediticia" />
+                <ScalarProperty Name="lapMaxSemanas" ColumnName="lapMaxSemanas" />
+                <ScalarProperty Name="lapMinSemanas" ColumnName="lapMinSemanas" />
+                <ScalarProperty Name="tipoRetornoPagoSemanal" ColumnName="tipoRetornoPagoSemanal" />
+                <ScalarProperty Name="tipoRetornoPagoCatorcenal" ColumnName="tipoRetornoPagoCatorcenal" />
+                <ScalarProperty Name="tipoRetornoPago28Dias" ColumnName="tipoRetornoPago28Dias" />
+                <ScalarProperty Name="otrasComisones" ColumnName="otrasComisones" />
+                <ScalarProperty Name="numeroDeIntegrantes" ColumnName="numeroDeIntegrantes" />
+                <ScalarProperty Name="grantiaPersonalAval" ColumnName="grantiaPersonalAval" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="soloclientes" ColumnName="soloclientes" />
+                <ScalarProperty Name="costoTotalAnualCredito" ColumnName="costoTotalAnualCredito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomePromociones">
+            <EntityTypeMapping TypeName="FSADMINModel.HomePromociones">
+              <MappingFragment StoreEntitySet="HomePromociones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeSucursales">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeSucursales">
+              <MappingFragment StoreEntitySet="HomeSucursales">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
+                <ScalarProperty Name="sucursal" ColumnName="sucursal" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeUNE">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeUNE">
+              <MappingFragment StoreEntitySet="HomeUNE">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+                <ScalarProperty Name="path" ColumnName="path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeValores">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeValores">
+              <MappingFragment StoreEntitySet="HomeValores">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="texto" ColumnName="texto" />
+                <ScalarProperty Name="textoHead" ColumnName="textoHead" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeVideoCategorias">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeVideoCategorias">
+              <MappingFragment StoreEntitySet="HomeVideoCategorias">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="filterCategoria" ColumnName="filterCategoria" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeVideoITems">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeVideoITems">
+              <MappingFragment StoreEntitySet="HomeVideoITems">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="urlyt" ColumnName="urlyt" />
+                <ScalarProperty Name="imngurlyt" ColumnName="imngurlyt" />
+                <ScalarProperty Name="datafilter" ColumnName="datafilter" />
+                <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeVision">
+            <EntityTypeMapping TypeName="FSADMINModel.HomeVision">
+              <MappingFragment StoreEntitySet="HomeVision">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoFinancieroInteres">
+            <EntityTypeMapping TypeName="FSADMINModel.ProductoFinancieroInteres">
+              <MappingFragment StoreEntitySet="ProductoFinancieroInteres">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_productofinanciero" ColumnName="id_productofinanciero" />
+                <ScalarProperty Name="interes" ColumnName="interes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FSADMINModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestingT">
+            <EntityTypeMapping TypeName="FSADMINModel.TestingT">
+              <MappingFragment StoreEntitySet="TestingT">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_UserCreated" ColumnName="id_UserCreated" />
+                <ScalarProperty Name="val1" ColumnName="val1" />
+                <ScalarProperty Name="val2" ColumnName="val2" />
+                <ScalarProperty Name="val3" ColumnName="val3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

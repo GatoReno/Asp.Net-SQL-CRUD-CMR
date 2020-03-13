@@ -1,0 +1,130 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "PermisionsRoles";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<h2>PermisionsRoles</h2>
+
+
+<div class="col-lg-6" align="center">
+    <table class="table table-fixed">
+        <thead>
+            <tr>
+                <th class="col-xs-4">*</th>
+                <th class="col-xs-4"></th>
+                <th class="col-xs-4"></th>
+
+            </tr>
+        </thead>
+        <tbody id="User-T"></tbody>
+    </table>
+</div>
+<div class="col-lg-6">
+    Actualizar Datos.
+    <form action="/" method="post">
+        <input type="submit" name="name" class="btn btn-default pull-right" value="Editar" />
+        <br />
+        <label>User Name</label><br />
+        <input class="form-control" type="text" id="userName"
+               name="userName" value="" /><br />
+
+        <label>Telefono</label><br />
+        <input class="form-control" type="text" id="phoneNumber"
+               name="phoneNumber" value="" /><br />
+
+
+    </form>
+</div>
+
+<script>
+    $.ajax({
+        url: "/DashboardAdmin/UserInfoJSON/@ViewBag.Id",
+        type: "GET",
+        dataType: "json",
+        //contentType: "application/json; charset=utf-8",
+
+        success: function (response) {
+
+            console.log(response)
+            //alert(response);
+
+            document.getElementById('User-T')
+                .innerHTML += `
+                                 <tr>
+                                    <td class="col-xs-3"><font size="1">`+ response.Id + `</font></td>
+                                    <td class="col-xs-3"><font size="3">`+ response.Email + `</font></td>
+                                    <td class="col-xs-3"></td>
+                                    <td class="col-xs-3">
+                                    <a href="#" onclick=" DeleteUser('@ViewBag.Id','`+ response.UserName + `','` + response.Email + `')" class="btn btn-danger pull-right">Eliminar</a>
+                                    </td>
+
+                                </tr>
+                            `;
+
+            $('#userName').val(response.UserName);
+            $('#phoneNumber').val(response.PhoneNumber);
+
+
+
+        },
+
+        error: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(jqXHR.responseJSON + "pordu");
+
+        }
+
+    });
+
+
+    function DeleteUser(id,UserName,Email) {
+          var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar Usuario';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este usuario ?</h4>
+                            <h5>Ususario : ${UserName} </h5>
+                            <h5>Email : ${Email} </h5><br/>
+<small>Nota : si eliminas este usuario no podrá tener acceso a ninguna sección de esta aplicación , solo con una nueva alta y asignación de <b>ROLE</b> podrá accersar</small>
+                        <form action="/DashboardAdmin/DeleteUNE" method="post">
+                            <input type="text" class="hidden " name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden " name="id" value="`+ id +`" />
+                            <input type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+    }
+</script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-header"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

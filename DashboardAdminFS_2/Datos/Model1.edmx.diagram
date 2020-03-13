@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="236795999589415bad18ebc349d16a14" Name="Diagram1">
+        <EntityTypeShape EntityType="FSADMINModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.AdminBitacora" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.AspNetRoles" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.AspNetUserRoles" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.Contactos" Width="1.5" PointX="7.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeAnuncioCookies" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeBarras" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeBeneficios" Width="1.5" PointX="2.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeCarrouselItems" Width="1.5" PointX="8.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeCodigoDeEtica" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeContactoDatos" Width="1.5" PointX="4.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeCostosComisiones" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeCounters" Width="1.5" PointX="9.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeDatosExtra" Width="1.5" PointX="10.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeInfoFinanciera" Width="1.5" PointX="6.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeMision" Width="1.5" PointX="11.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeProductosFinancieros" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomePromociones" Width="1.5" PointX="11.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeSucursales" Width="1.5" PointX="11.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeUNE" Width="1.5" PointX="2.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeValores" Width="1.5" PointX="12.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeVideoCategorias" Width="1.5" PointX="8.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeVideoITems" Width="1.5" PointX="10.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.HomeVision" Width="1.5" PointX="12.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.ProductoFinancieroInteres" Width="1.5" PointX="13.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.sysdiagrams" Width="1.5" PointX="13.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSADMINModel.TestingT" Width="1.5" PointX="13.75" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="FSADMINModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="FSADMINModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="FSADMINModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="FSADMINModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

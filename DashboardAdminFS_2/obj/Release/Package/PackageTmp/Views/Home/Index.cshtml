@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<br />
+
+
+<div class="card" style="padding:20px; margin-top:5%;">
+    <h1>Gestion Web Financiera Sumate <img src="~/StaticImgs/logohorizontal-01.png" width="350" class="img-responsive pull-right" alt="Alternate Text" /></h1>
+    <p class="lead">Bienvenido en esta sección encontrarás las instrucciones para llevar a cargo tus tareas según tu <b>Role</b>.</p>
+
+</div>
+
+<div class="row" align="center">
+    <h3>@User.Identity.Name</h3>
+</div>
+<div class="row">
+    <hr />
+</div>
+
+<div class="row" align="center">
+    <h3>Instrucciones</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Adimistración</h3>
+        <p>
+            Administración de usuarios, componentes web y financieros , asignación de roles  etc.
+        </p>
+        <p>
+            <a class="btn btn-default" data-toggle="collapse" href="#collapseAdmin" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Instrucciones
+            </a>
+        </p>
+
+
+        <div class="collapse" id="collapseAdmin">
+            <div class="card card-body" style="padding:20px;">
+                <p>Cuenta con un diferentes modulos</p>
+                <ul>
+                    <li>Dashboard general - configuración web</li>
+                    <li>Administración de roles</li>
+                    <li>Administración y registro de usuarios</li>
+                    <li>Bitacora de atividades</li>
+                </ul>
+                <p>Todas las actividades realizadas por ti o cualquiera en la aplicación serán registradas en la bitácora</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <h3>Finanzas</h3>
+        <p>Acceso a archivos UNE / COSTOS Y COMSIONES / Información financiera y expedientes.</p>
+        <p>
+            <a class="btn btn-default" data-toggle="collapse" href="#collapseFin" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Instrucciones
+            </a>
+        </p>
+
+        <div class="collapse" id="collapseFin">
+            <div class="card card-body" style="padding:20px;">
+
+                <ul>
+                    <li>Productos financieros e intereses</li>
+                    <li>Docuemtnos UNE</li>
+                    <li>Información financiera e historial</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Imagen</h3>
+        <p>Configración web y contenido. Slider / Barras / Mision Vision Información general / mapas de google / etc</p>
+        <p>
+            <a class="btn btn-default" data-toggle="collapse" href="#collapseImagen" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Instrucciones
+            </a>
+        </p>
+
+
+
+
+        <div class="collapse" id="collapseImagen">
+            <div class="card card-body" style="padding:20px;">
+
+                <ul>
+                    <li>Configruación de Slider</li>
+                    <li>Gestion de suscursales en Google Maps</li>
+                    <li>Videos</li>
+                    <li>Promosiones</li>
+                    <li>Misión / Visión</li>
+                    <li>Datos de contacto</li>
+                    <li>Anuncios de cookies</li>
+                    <li>Beneficios</li>
+                    <li>Valores de empresa</li>
+                    <li>Código de ética</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    
+
+
+    <div class="col-md-4">
+        <h3>Direccion Administracion</h3>
+        <p>Formulario de contacto y bolsa de trabajo</p>
+        <p>
+            <a class="btn btn-default" data-toggle="collapse" href="#collapseDireccionAdministracion" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Instrucciones
+            </a>
+        </p>
+
+        <div class="collapse" id="collapseDireccionAdministracion">
+            <div class="card card-body" style="padding:20px;">
+                <ul>
+                    <li>En espera</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" style="margin-top:10%;">
+    <div class="col-lg-12">
+        <small>
+            <b>Nota: </b>
+            Todos los movimientos que realices dentro de la aplicación son registrados, así que te cuidado al aplicar cambios. Si tienes dudas del funcionamiento de la plataforma
+            o no puedes acceder a tu sección ponte en contacto con un administrador.
+        </small>
+        <br />
+        <div align="center"><a href="#" class="btn  btn-default">Contacto</a></div>
+    </div>
+</div>

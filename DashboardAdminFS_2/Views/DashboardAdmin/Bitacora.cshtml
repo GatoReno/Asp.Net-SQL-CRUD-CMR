@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "Bitacora";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Bitacora</h2>
+        </div>
+
+
+        <div class="col-lg-12">
+            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="th-sm">
+                            Descripcion
+
+                        </th>
+                        <th class="th-sm">
+                            Id de usuario
+
+                        </th>
+                        <th class="th-sm">
+                            Fecha
+
+                        </th>
+                        <th class="th-sm">
+                            Comentario
+
+                        </th>
+                        <th class="th-sm">
+                             
+
+                        </th>
+                        <th class="th-sm">
+                             
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="bitacora-t"></tbody>
+                <tfoot>
+                    <tr>
+                        <th class="th-sm">
+                            Descripcion
+
+                        </th>
+                        <th class="th-sm">
+                            Id de usuario
+
+                        </th>
+                        <th class="th-sm">
+                            Fecha
+
+                        </th>
+                        <th class="th-sm">
+                            Comentario
+
+                        </th>
+                        <th class="th-sm">
+
+
+                        </th>
+                        <th class="th-sm">
+
+
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/js/mdb.min.js"></script>
+
+
+<script>
+
+
+
+    $.ajax({
+        url: "/DashboardAdmin/BitacoraListJson",
+        type: "GET",
+        dataType: "json",
+        //contentType: "application/json; charset=utf-8",
+
+        success: function (response) {
+
+
+            console.log("videos: ------------ " + response);
+            //alert(response);
+
+
+            var resplength = response.length;
+          
+
+            for (let i = 0; i <= resplength; i++) {
+
+                var DateString = response[i].created_at;
+                var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                        var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                //Al hacer lo anterior obtenemos 1567618700920 
+                        var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                        //Por lo tanto DT ya es una fecha
+
+                        //Creamos una variable month y obtenemos el mes +1 
+                        var month = dt.getMonth() + 1;
+                        //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                        var monthString = month > 9 ? month : '0' + month;
+                        //Obtenemos el dia
+                        var day = dt.getDate();
+                        //Aplicamos lo mismo que con el mes
+                        var dayString = day > 9 ? day : '0' + day;
+                        //Obtenemos el año
+                        var year = dt.getFullYear();
+                        shortDate = monthString + '-' + dayString + '-' + year;
+
+                document.getElementById('bitacora-t').innerHTML += `
+                <tr>
+                <td class="col-xs-4"><font size="3">`+ response[i].action + `</font></td>
+                <td class="col-xs-4"><font size="2">`+ response[i].id_userCreated + `</font></td>
+                <td class="col-xs-4"><font size="3">`+ shortDate + `</font></td>
+                <td class="col-xs-4"><font size="2">`+ response[i].comments + `</font></td></td>
+                <td class="col-xs-4"><a class="btn btn-default">ver</a></td>
+                <td class="col-xs-4"><a class="btn btn-danger">borrar</a></td>
+            </tr>
+            `;
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(err);
+        }
+    });
+
+
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+</script>

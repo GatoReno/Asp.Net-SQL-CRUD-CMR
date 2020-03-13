@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FSADMINModelStoreContainer" CdmEntityContainer="DBEnt">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="FSADMINModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminBitacora">
+      <EntityTypeMapping TypeName="FSADMINModel.AdminBitacora">
+        <MappingFragment StoreEntitySet="AdminBitacora">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="action" ColumnName="action" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="FSADMINModel.AspNetRoles">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="FSADMINModel.AspNetUserClaims">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="FSADMINModel.AspNetUserLogins">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserRoles">
+      <EntityTypeMapping TypeName="FSADMINModel.AspNetUserRoles">
+        <MappingFragment StoreEntitySet="AspNetUserRoles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="FSADMINModel.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contactos">
+      <EntityTypeMapping TypeName="FSADMINModel.Contactos">
+        <MappingFragment StoreEntitySet="Contactos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="head" ColumnName="head" />
+          <ScalarProperty Name="th1" ColumnName="th1" />
+          <ScalarProperty Name="th2" ColumnName="th2" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="destino" ColumnName="destino" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="oculto" ColumnName="oculto" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeAnuncioCookies">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeAnuncioCookies">
+        <MappingFragment StoreEntitySet="HomeAnuncioCookies">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeBarras">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeBarras">
+        <MappingFragment StoreEntitySet="HomeBarras">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="color" ColumnName="color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeBeneficios">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeBeneficios">
+        <MappingFragment StoreEntitySet="HomeBeneficios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="texto" ColumnName="texto" />
+          <ScalarProperty Name="icono" ColumnName="icono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeCarrouselItems">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeCarrouselItems">
+        <MappingFragment StoreEntitySet="HomeCarrouselItems">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="h2tag" ColumnName="h2tag" />
+          <ScalarProperty Name="ptag" ColumnName="ptag" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeCodigoDeEtica">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeCodigoDeEtica">
+        <MappingFragment StoreEntitySet="HomeCodigoDeEtica">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="texto" ColumnName="texto" />
+          <ScalarProperty Name="textoHead" ColumnName="textoHead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeContactoDatos">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeContactoDatos">
+        <MappingFragment StoreEntitySet="HomeContactoDatos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeCostosComisiones">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeCostosComisiones">
+        <MappingFragment StoreEntitySet="HomeCostosComisiones">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeCounters">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeCounters">
+        <MappingFragment StoreEntitySet="HomeCounters">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeDatosExtra">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeDatosExtra">
+        <MappingFragment StoreEntitySet="HomeDatosExtra">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="img" ColumnName="img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeInfoFinanciera">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeInfoFinanciera">
+        <MappingFragment StoreEntitySet="HomeInfoFinanciera">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="day" ColumnName="day" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeMision">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeMision">
+        <MappingFragment StoreEntitySet="HomeMision">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="img" ColumnName="img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeProductosFinancieros">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeProductosFinancieros">
+        <MappingFragment StoreEntitySet="HomeProductosFinancieros">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="montoCredito" ColumnName="montoCredito" />
+          <ScalarProperty Name="plazoMinimo" ColumnName="plazoMinimo" />
+          <ScalarProperty Name="plazoMaximo" ColumnName="plazoMaximo" />
+          <ScalarProperty Name="frecuenciasDePago" ColumnName="frecuenciasDePago" />
+          <ScalarProperty Name="esquemaDeCobro" ColumnName="esquemaDeCobro" />
+          <ScalarProperty Name="requisitos" ColumnName="requisitos" />
+          <ScalarProperty Name="tasaDeInteres" ColumnName="tasaDeInteres" />
+          <ScalarProperty Name="CAT" ColumnName="CAT" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="tipocredito" ColumnName="tipocredito" />
+          <ScalarProperty Name="tencologiaCrediticia" ColumnName="tencologiaCrediticia" />
+          <ScalarProperty Name="lapMaxSemanas" ColumnName="lapMaxSemanas" />
+          <ScalarProperty Name="lapMinSemanas" ColumnName="lapMinSemanas" />
+          <ScalarProperty Name="tipoRetornoPagoSemanal" ColumnName="tipoRetornoPagoSemanal" />
+          <ScalarProperty Name="tipoRetornoPagoCatorcenal" ColumnName="tipoRetornoPagoCatorcenal" />
+          <ScalarProperty Name="tipoRetornoPago28Dias" ColumnName="tipoRetornoPago28Dias" />
+          <ScalarProperty Name="otrasComisones" ColumnName="otrasComisones" />
+          <ScalarProperty Name="numeroDeIntegrantes" ColumnName="numeroDeIntegrantes" />
+          <ScalarProperty Name="grantiaPersonalAval" ColumnName="grantiaPersonalAval" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+          <ScalarProperty Name="soloclientes" ColumnName="soloclientes" />
+          <ScalarProperty Name="costoTotalAnualCredito" ColumnName="costoTotalAnualCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomePromociones">
+      <EntityTypeMapping TypeName="FSADMINModel.HomePromociones">
+        <MappingFragment StoreEntitySet="HomePromociones">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeSucursales">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeSucursales">
+        <MappingFragment StoreEntitySet="HomeSucursales">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="longitud" ColumnName="longitud" />
+          <ScalarProperty Name="latitud" ColumnName="latitud" />
+          <ScalarProperty Name="sucursal" ColumnName="sucursal" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeUNE">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeUNE">
+        <MappingFragment StoreEntitySet="HomeUNE">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+          <ScalarProperty Name="path" ColumnName="path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeValores">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeValores">
+        <MappingFragment StoreEntitySet="HomeValores">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="texto" ColumnName="texto" />
+          <ScalarProperty Name="textoHead" ColumnName="textoHead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeVideoCategorias">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeVideoCategorias">
+        <MappingFragment StoreEntitySet="HomeVideoCategorias">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="filterCategoria" ColumnName="filterCategoria" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeVideoITems">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeVideoITems">
+        <MappingFragment StoreEntitySet="HomeVideoITems">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="urlyt" ColumnName="urlyt" />
+          <ScalarProperty Name="imngurlyt" ColumnName="imngurlyt" />
+          <ScalarProperty Name="datafilter" ColumnName="datafilter" />
+          <ScalarProperty Name="id_userCreated" ColumnName="id_userCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomeVision">
+      <EntityTypeMapping TypeName="FSADMINModel.HomeVision">
+        <MappingFragment StoreEntitySet="HomeVision">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="img" ColumnName="img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductoFinancieroInteres">
+      <EntityTypeMapping TypeName="FSADMINModel.ProductoFinancieroInteres">
+        <MappingFragment StoreEntitySet="ProductoFinancieroInteres">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_productofinanciero" ColumnName="id_productofinanciero" />
+          <ScalarProperty Name="interes" ColumnName="interes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="FSADMINModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestingT">
+      <EntityTypeMapping TypeName="FSADMINModel.TestingT">
+        <MappingFragment StoreEntitySet="TestingT">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_UserCreated" ColumnName="id_UserCreated" />
+          <ScalarProperty Name="val1" ColumnName="val1" />
+          <ScalarProperty Name="val2" ColumnName="val2" />
+          <ScalarProperty Name="val3" ColumnName="val3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

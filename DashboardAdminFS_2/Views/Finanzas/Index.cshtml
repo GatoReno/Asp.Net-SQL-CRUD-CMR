@@ -1,0 +1,980 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Finanzas";
+
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<div class="row top7">
+
+    <div class="col-lg-12" id="prodFin">
+
+        <h2>Productos Financieros</h2>
+
+         
+    </div>
+
+    <div class="col-lg-6 col-md-6" align="center">
+
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h3>Agregar Producto</h3>
+            </div>
+            <div class="card-body">
+                <a class="btn btn-default form-control" style="font-size:10pt" data-toggle="collapse" href="#collapseFormInsertProducto" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Agregar
+                </a>
+                <div class="collapse" id="collapseFormInsertProducto">
+                    <div class="card card-body" style="padding:18px">
+                        @using (Html.BeginForm("InsertProductoFinanciero", "DashboardAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                            <br />
+                            <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                            <img id="PreviewImage" class="" width="180" height="240" src=""
+                                 alt="Imagen de crédito" style="height:100px;" required />
+
+                            <br>
+                            <input name="files" class="form-control" id="file_prodfin" onchange="readURL(this);" type="file" required />
+                            <script>
+                                function readURL(input) {
+                                    if (input.files && input.files[0]) {//Check if input has files.
+                                        var reader = new FileReader(); //Initialize FileReader.
+                                        reader.onload = function (e) {
+                                            $('#PreviewImage').attr('src', e.target.result);
+                                            $("#PreviewImage").resizable({ aspectRatio: true, maxWidth: 300 });
+                                        };
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                    else {
+                                        $('#PreviewImage').attr('src', "#");
+                                    }
+                                }
+                            </script>
+                            <input type="text" class="form-control" name="title" id="titleCredito" placeholder="Nombre del Producto / Credito EJEMPLO" required />
+                            <input type="text" class="form-control" name="descripcion" id="descrpcionCredito" placeholder="Descripción" required />
+                            <input type="text" class="form-control" name="montoCredito" id="montoCredito" placeholder="Monto de Crédito" required />
+                            <input type="number" min="84" max="365" class="form-control" name="plazoMinimo" id="plazoMinimoCredito" placeholder="Plazo Máximo en días" required />
+                            <input type="number" min="84" max="365" class="form-control" name="plazoMaximo" id="plazoMaximoCredito" placeholder="Plazo Mínimo en días" required />
+
+                            <input type="text" class="form-control" name="frecuenciasDePago" id="frecuenciaDePagosCredito" placeholder="Frecuencia De Pagos" required />
+                            <input type="text" class="form-control" name="esquemaDeCobro" id="esquemaDeCobroCredito" placeholder="Esquema De Cobro" required />
+                            <input type="text" class="form-control" name="requisitos" id="requisitosCredito" placeholder="Requisitos" required />
+                            <input type="text" class="form-control" name="tasaDeInteres" id="tasaDeInteresPonderadaAnualCredito" placeholder="Tasa De Interes Ponderada Anual" required />
+
+                            <input type="text" class="form-control" name="CAT" id=" " placeholder="Descripción Tasa De Interes Ponderada Anual" required />
+
+                            <input type="text" class="form-control" name="costoTotalAnualCredito" id="costoTotalAnualDescripcionCredito" placeholder="Costo Total Anual Descripcion" required />
+                            <br />
+                            <label>Interés </label> <br />
+                            <small>Puedes agregar otras tasas , más adelante</small>
+                            <br />
+                            <input type="text" class="form-control" name="interes" placeholder=" 1.0 % " />
+
+                            <br />
+                            <label>
+                                TECNOLOGIA CREDITICIA
+                            </label>
+                            <br />
+
+                            <select name="tencologiaCrediticia" class="form-control" required>
+                                <option value="Grupal">Grupal</option>
+                                <option value="Individual">Individual</option>
+                            </select>
+                            <br />
+
+                            <input type="text" class="form-control" name="tipocredito" id="tipocredito" placeholder="tipo credito" required />
+                            <br />
+
+                            <label>Integrantes</label><br />
+                            <input type="number" class="form-control" name="numeroDeIntegrantes" id="numeroDeIntegrantes"
+                                   placeholder="numeroDeIntegrantes" required />
+                            <br />
+
+                            <label>Rango de Edad</label><br />
+                            <input type="text" class="form-control" name="edad" id="edadrange"
+                                   placeholder="18 - 60" required />
+                            <br />
+                            <textarea name="otrasComisones" placeholder="Otras comisiones" class="form-control"></textarea>
+                            <br />
+
+                            <label>TIEMPO DE RETORNO DEL PAGO SEMANAL</label>
+                            <input type="text" class="form-control" name="tipoRetornoPagoSemanal" id="tipoRetornoPagoSemanal"
+                                   placeholder="Mínimo 7 días - Máximo 21 días" required />
+                            <br />
+                            <label>TIEMPO DE RETORNO DEL PAGO CATORCENAL</label>
+                            <input type="text" class="form-control" name="tipoRetornoPagocatorcenal" id="tipoRetornoPagocatorcenal"
+                                   placeholder="Mínimo 14 días - Máximo 30 días" required />
+
+                            <br />
+                            <label>TIEMPO DE RETORNO DEL PAGO CADA 28 DIAS</label>
+                            <input type="text" class="form-control" name="tipoRetornoPago28Dias" id="tipoRetornoPago28Dias"
+                                   placeholder="Mínimo 28 días - Máximo 45 días" required />
+
+                            <br />
+
+                            <label>Solo para clientes</label>
+                            <input type="text" class="form-control" name="solocliente" id="solocliente"
+                                   placeholder="grantiaPersonalAval" required />
+                            <br />
+                            <label>Aval</label>
+                            <input type="text" class="form-control" name="grantiaPersonalAval" id="grantiaPersonalAval"
+                                   placeholder="grantiaPersonalAval" required />
+
+                            <br />
+                            <input type="submit" style="font-size:10pt" class="form-control btn btn-default" name="" id="productoFinForm" value="Crear Producto " />
+
+                        }
+                    </div>
+                </div>
+                <!-- { id = "productoFinForm" ,  -->
+            </div>
+        </div>
+
+
+
+
+
+        <hr />
+
+    </div>
+    <div class="col-lg-6 col-md-6">
+
+
+        <div class="card" style="padding:18px">
+            <div class="card-header"><h3>Productos financieros actuales</h3></div>
+            <div class="card-body">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <small>
+                            Tabla de Productos Financieros
+                        </small>
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-3">*</th>
+                                <th class="col-xs-3"></th>
+                                <th class="col-xs-3"></th>
+                                <th class="col-xs-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="creditos-T"></tbody>
+                    </table>
+                </div>
+
+                <hr />
+                <script>
+             $.ajax({
+                url: "/DashboardAdmin/ProductosFinancierosListJson",
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+
+
+                    console.log(response)
+                    //alert(response);
+
+
+                    var resplength = response.length;
+
+
+                    for (let i = 0; i <= resplength; i++) {
+                        document.getElementById('creditos-T')
+                            .innerHTML += `
+                                 <tr>
+                                <td class="col-xs-3"><font size="2">`+ response[i].id + `</font></td>
+                                <td class="col-xs-3"><font size="2">`+ response[i].title + `</font></td>
+                                <td class="col-xs-3"><a style="font-size:10pt" href="/ProductoFinanciero/Details/`+ response[i].id + `" class="btn btn-default">Editar</a></td>
+                                <td class="col-xs-3">
+                                <a href="#" style="font-size:10pt" onclick="showDeleteProductoFinanciero('`+ response[i].id + `')" class="btn btn-danger">Eliminar</a>
+
+                                </td>
+
+                    </tr>
+                            `;
+                    }
+
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(jqXHR.responseJSON + "pordu");
+
+                }
+
+             });
+
+
+
+            function showDeleteProductoFinanciero(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar Producto Financiero Credito';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar el este producto financiero?</h4>
+                        <form action="/DashboardAdmin/DeleteProductosFinanciero" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+
+                            <input type="submit" style="font-size:10pt" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+            }
+
+                </script>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="col-lg-12" id="UNEdiv">
+
+
+    <h2>
+        Financiera Súmate UNE
+        de atención a usuarios
+    </h2>
+    <hr />
+</div>
+
+<div class="col-lg-6 col-md-6">
+    <div align="center">
+        <div class="card" style="padding:18px">
+            <div class="card-header" align="center"> <h3>Actualizar Documeto </h3></div>
+            <div class="card-body">
+                <form action="/DashboardAdmin/InsertUNE/" method="post" enctype="multipart/form-data">
+                    <label>Documento en PDF</label><br /><br />
+                    <input type="file" name="files" value="" required /><br />
+                    <input type="text" name="id_userCreated" id="" class="hidden" value="@User.Identity.GetUserId()" />
+
+                    <input type="submit" style="font-size:10pt" class="btn btn-default form-control" name="name" value="Actualizar" style="font-size:10pt" />
+                </form>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+</div>
+<div class="col-lg-6 col-md-6">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header">
+            <h3>
+                Financiera Súmate UNE
+                de atención a usuarios
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documento actual
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="UNE-T"></tbody>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<div class="col-lg-12">
+
+
+    <hr />
+
+</div>
+
+
+
+<div class="col-lg-12" id="InfoFinDiv">
+
+
+    <h2>Información Financiera </h2>
+    <hr />
+</div>
+<div class="col-lg-6 col-md-6" align="center">
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"><h3>Agregar Documeto </h3></div>
+        <div class="card-body">
+            <form action="/dashboardadmin/InsertInformacionFinanciera" enctype="multipart/form-data" method="post">
+
+
+                <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+
+                <input class="form-control" type="file" name="files" value="" required /><br />
+                <select name="tipo" class="form-control" required>
+                    <option value="anual">Anual</option>
+                    <option value="trimestral">Trimestral</option>
+                    <option value="mensual">Mensual</option>
+                </select>
+                <br />
+
+                <hr />
+                <label>
+                    Correspondiente a la fecha
+                </label>
+                <br />
+                <input type="date" class="form-control" name="datecorresponde" value="" />
+
+
+                <br />
+                <input type="submit" class="form-control btn btn-default" name="name" style="font-size:10pt" value="Agregar documento" />
+
+            </form>
+        </div>
+    </div>
+
+
+</div>
+<div class="col-lg-6">
+
+
+    <div class="card" style="padding:18px">
+        <div class="card-header">
+            <h3>Anual</h3>
+        </div>
+        <div class="card-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documentos de información financiera anual
+                        <a href="/DashboardAdmin/Anuales/" class="btn btn-default pull-right">Ver Anuales</a>Trimestrales
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="T-Anual"></tbody>
+                </table>
+            </div>
+
+            <script>
+                        $.ajax({
+                            url: "/DashboardAdmin/InfoFinAnualListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+
+
+                                    var DateString = response[i].created_at;
+                                    var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                                    var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                                    //Al hacer lo anterior obtenemos 1567618700920
+                                    var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                                    //Por lo tanto DT ya es una fecha
+
+                                    //Creamos una variable month y obtenemos el mes +1
+                                    var month = dt.getMonth() + 1;
+                                    //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                                    var monthString = month > 9 ? month : '0' + month;
+                                    //Obtenemos el dia
+                                    var day = dt.getDate();
+                                    //Aplicamos lo mismo que con el mes
+                                    var dayString = day > 9 ? day : '0' + day;
+                                    //Obtenemos el año
+                                    var year = dt.getFullYear();
+                                    shortDate = monthString + '-' + dayString + '-' + year;
+                                    document.getElementById('T-Anual').innerHTML += `
+                                         <tr>
+                                            <td class="col-xs-4">`+ response[i].id + `</td>
+                                            <td class="col-xs-4"><font size="2">`+ shortDate + `<font /></td>
+                                            <td class="col-xs-4"><a style="font-size:10pt" href="`+ response[i].path + `"  download class="btn btn-default">Ver</a>
+                                                <a href="#" style="font-size:10pt" onclick="showDeleteAnual(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                        </tr>
+                                        `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+
+
+
+                        function showDeleteAnual(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar información financiera Trimestral?';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este documento de información financiera Anual?</h4>
+                        <form action="/DashboardAdmin/DeleteAnualInfoFin" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+            </script>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6">
+
+
+    <div class="card" style="padding:18px">
+        <div class="card-header">
+            <h3>Trimestral</h3>
+        </div>
+        <div class="card-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documentos de información financiera Trimestral
+                        <a href="/DashboardAdmin/Trimestrales/" style="font-size:10pt" class="btn btn-default pull-right">Ver Trimestrales</a>
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="T-Trimestral"></tbody>
+                </table>
+            </div>
+
+            <script>
+                $.ajax({
+                    url: "/DashboardAdmin/InfoFinTrimestralListJson",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+
+
+                        console.log(response)
+                        //alert(response);
+
+
+                        var resplength = response.length;
+
+
+                        for (let i = 0; i <= resplength; i++) {
+
+                            var DateString = response[i].created_at;
+                            var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                            var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                            //Al hacer lo anterior obtenemos 1567618700920
+                            var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                            //Por lo tanto DT ya es una fecha
+
+                            //Creamos una variable month y obtenemos el mes +1
+                            var month = dt.getMonth() + 1;
+                            //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                            var monthString = month > 9 ? month : '0' + month;
+                            //Obtenemos el dia
+                            var day = dt.getDate();
+                            //Aplicamos lo mismo que con el mes
+                            var dayString = day > 9 ? day : '0' + day;
+                            //Obtenemos el año
+                            var year = dt.getFullYear();
+                            shortDate = monthString + '-' + dayString + '-' + year;
+
+                            document.getElementById('T-Trimestral').innerHTML += `
+                                <tr>
+                                <td class="col-xs-4"> `+ response[i].id + ` </td>
+                                <td class="col-xs-4"><font size="2">`+ shortDate + `</font><</td>
+                                <td class="col-xs-4"><a style="font-size:10pt" href="`+ response[i].path + `" download class="btn btn-default">Ver</a>
+                                    <a style="font-size:10pt"  onclick="showDeleteTrimestral(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                            </tr>
+                            `;
+                        }
+
+
+                    },
+
+                    error: function (jqXHR, textStatus, err) {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(err + 'err');
+
+                    }
+
+                });
+
+                            function showDeleteTrimestral(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar información financiera Trimestral?';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este documento de información financiera Trimestral?</h4>
+                        <form action="/DashboardAdmin/DeleteTrimestralInfoFin" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input style="font-size:10pt" type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+            </script>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6 "></div>
+<div class="col-lg-6 ">
+
+
+    <div class="card" style="padding:18px">
+        <div class="card-header"> <h3>Mensual</h3></div>
+        <div class="card-body">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        Documentos de información financiera Mensual
+                        <a href="/DashboardAdmin/mensuales/" class="btn btn-default pull-right">Ver Trimestrales</a>
+                    </h4>
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">#</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="T-Mensual"></tbody>
+                </table>
+            </div>
+
+            <script>
+                        $.ajax({
+                            url: "/DashboardAdmin/InfoFinMensualListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+
+                                    var DateString = response[i].created_at;
+                                    var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                                    var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                                    //Al hacer lo anterior obtenemos 1567618700920
+                                    var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                                    //Por lo tanto DT ya es una fecha
+
+                                    //Creamos una variable month y obtenemos el mes +1
+                                    var month = dt.getMonth() + 1;
+                                    //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                                    var monthString = month > 9 ? month : '0' + month;
+                                    //Obtenemos el dia
+                                    var day = dt.getDate();
+                                    //Aplicamos lo mismo que con el mes
+                                    var dayString = day > 9 ? day : '0' + day;
+                                    //Obtenemos el año
+                                    var year = dt.getFullYear();
+                                    shortDate = monthString + '-' + dayString + '-' + year;
+                                    document.getElementById('T-Mensual').innerHTML += `
+                                         <tr>
+                                            <td class="col-xs-4">`+ response[i].id + `</td>
+                                            <td class="col-xs-4"><font size="2">`+ shortDate + `<font/></td>
+                                            <td class="col-xs-4"><a style="font-size:10pt" href="`+ response[i].path + `" download class="btn btn-default">Ver</a>
+                                                <a style="font-size:10pt" href="#" onclick="showDeleteMensual(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                        </tr>
+                                        `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err + 'err');
+
+                            }
+
+                        });
+                        function showDeleteMensual(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar información financiera Mensual?';
+                            document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este documento de información financiera Mensual?</h4>
+                        <form action="/DashboardAdmin/DeleteMensualInfoFin" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+ idx + `" />
+                            <input type="text" class="hidden" name="id" value="`+ id + `" />
+                            <input style="font-size:10pt" type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+            </script>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-12">
+
+    <!--UNE CALLING DATA-->
+    <script>
+                $.ajax({
+                    url: "/DashboardAdmin/UNEListJson",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+
+
+                        console.log(response)
+                        //alert(response);
+
+
+                        var resplength = response.length;
+
+
+                        for (let i = 0; i <= resplength; i++) {
+
+                                                      var DateString = response[i].created_at;
+                        var regex = /-?\d+/; //Agregamos una expresión regular para eliminar el /Date
+                                var matches = regex.exec(DateString);// Con esto regresamos lo que haga match segun la expresión
+                        //Al hacer lo anterior obtenemos 1567618700920
+                        var dt = new Date(parseInt(matches[0])); //Entonces primero lo volvemos un INT y ese INT lo convertimos a una fecha
+                        //Por lo tanto DT ya es una fecha
+
+                        //Creamos una variable month y obtenemos el mes +1
+                        var month = dt.getMonth() + 1;
+                        //En esta parte validamos si el mes es 1 entonces quedaria 01 por eso el '0' pero si es mayor a 9 es decir 10,11 no es necesario
+                        var monthString = month > 9 ? month : '0' + month;
+                        //Obtenemos el dia
+                        var day = dt.getDate();
+                        //Aplicamos lo mismo que con el mes
+                        var dayString = day > 9 ? day : '0' + day;
+                        //Obtenemos el año
+                        var year = dt.getFullYear();
+                        shortDate = monthString + '-' + dayString + '-' + year;
+                            document.getElementById('UNE-T').innerHTML += `
+                                                 <tr>
+                                                    <td class="col-xs-4">`+ response[i].id + `</td>
+                                                    <td class="col-xs-4"><font size="2">`+ shortDate + `<font /></td>
+                                                    <td class="col-xs-4"><a style="font-size:10pt" href="`+ response[i].path + `" download class="btn btn-default">Ver</a>
+                                                        <a href="#" style="font-size:10pt" onclick="showDeleteUNE(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                                </tr>
+                                                `;
+                        }
+
+
+                    },
+
+                    error: function (jqXHR, textStatus, err) {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(err);
+
+                    }
+
+                });
+
+
+                function showDeleteUNE(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar documento UNE';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar está UNE?</h4>
+                        <form action="/DashboardAdmin/DeleteUNE" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input type="submit" style="font-size:10pt" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+            }
+
+
+    </script>
+    <hr />
+</div>
+
+
+<!-- costoyconsulta  -->
+<div class="col-lg-12">
+
+    <h2>
+        Costos y comisiones
+    </h2>
+    <hr />
+
+</div>
+
+
+<div class="col-lg-12">
+
+    <div class="col-lg-6 col-md-6">
+        <div align="center">
+            <div class="card" style="padding:18px">
+                <div class="card-header" align="center"> <h3>Actualizar Documeto </h3></div>
+                <div class="card-body">
+                    <form action="/DashboardAdmin/InsertCostoComisiones/" method="post" enctype="multipart/form-data">
+                        <label>Documento en PDF</label><br /><br />
+                        <input type="file" name="files" value="" required /><br />
+                        <input type="text" name="id_userCreated" id="" class="hidden" value="@User.Identity.GetUserId()" />
+
+                        <input type="submit" style="font-size:10pt" class="btn btn-default form-control" name="name" value="Actualizar" />
+                    </form>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+    <div class="col-lg-6 col-md-6">
+
+        <div class="card" style="padding:18px">
+            <div class="card-header">
+                <h3>
+                    Costos y comisiones
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            Documento actual
+                        </h4>
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">#</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="costosycomisiones-T"></tbody>
+                    </table>
+
+
+
++
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+
+              $.ajax({
+                            url: "/DashboardAdmin/CostoComisionesListJson",
+                            type: "GET",
+                            dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+
+                            success: function (response) {
+
+
+                                console.log(response)
+                                //alert(response);
+
+
+                                var resplength = response.length;
+
+
+                                for (let i = 0; i <= resplength; i++) {
+                                    document.getElementById('costosycomisiones-T').innerHTML += `
+                                                         <tr>
+                                                            <td class="col-xs-4"> </td>
+                                                             <td class="col-xs-4"><a style="font-size:10pt"  href="`+ response[i].path + `" download class="btn btn-default">Ver</a>
+                                                            <td class="col-xs-4">
+                                                                <a href="#" style="font-size:10pt" onclick="DeleteCostosYComisiones(`+ response[i].id + `)" class="btn btn-danger">Eliminar</a></td>
+                                                        </tr>
+                                                        `;
+                                }
+
+
+                            },
+
+                            error: function (jqXHR, textStatus, err) {
+                                //$('#myModalLabel').append(`error: - ${err}`);
+                                console.log(jqXHR);
+                                console.log(textStatus);
+                                console.log(err);
+
+                                alert(err);
+
+                            }
+
+                        });
+
+
+                           function DeleteCostosYComisiones(id) {
+                            var idx = '@User.Identity.GetUserId()';
+
+                            document.getElementById('modal-header').innerHTML = 'Eliminar Costos y comisiones Item';
+                            document.getElementById('modal-body').innerHTML = `
+                                    <div align="center">
+                                     <h4>¿Estás seguro que deseas eliminar este Costos y comisiones archivo?</h4>
+                                    <form action="/DashboardAdmin/DeleteCostosYComisiones" method="post">
+                                        <input type="text"  class="hidden" name="id_userCreated" value="`+idx+`" />
+                                        <input type="text" class="hidden" name="id" value="`+ id +`" />
+                                        <input type="submit" style="font-size:10pt" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                                    </form>
+
+                                    </div>
+                            `;
+
+
+                            $("#exampleModal").modal("show");
+                        }
+
+        </script>
+
+    </div>
+    <hr />
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-header"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

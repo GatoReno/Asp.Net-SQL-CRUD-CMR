@@ -1,0 +1,408 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "AdminRoles";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<h2>AdminRoles</h2>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form action="/DashboardAdmin/InsertRole" method="post">
+                <label>Ingresa el nombre de tu role</label><br />
+                <div id="responseJson"></div>
+                <input id="roleNew" type="text" placeholder="NOMBREDEROLE/ADMIN/EJECUTIVO/EJEMPLO"
+                       class="form-control"
+                       name="role" value="" required />
+                <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                <input type="submit" id="roleSubmit" name="name" value="Agregar" />
+            </form>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Roles actuales   </h3>
+
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-6">*</th>
+                            <th class="col-xs-6"></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody id="roles-T"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <hr />
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Usuarios actuales   </h3>
+
+                </div>
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">*</th>
+                            <th class="col-xs-4"></th>
+                            <th class="col-xs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-T"></tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <div class="col-lg-6 col-md-6" id="userDataHolder">
+            <div class="card" style="padding:18px">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 > <div id="UserName"></div></h4>
+                        </div>
+                        <div id="UserId" style="padding:18px">
+
+                        </div>
+                        <div id="formsetRole" style="padding:18px">
+                            <form action="/DashboardAdmin/SetRoleUser" method="post">
+                                <input type="text" name="id_user" id="id_userSet" class="hidden" value="" />
+                                <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                                <select class="form-control" id="selectRoles" name="Role"></select>
+                                <input type="submit" name="name" value="Asignar Role" />
+                            </form>
+                        </div>
+                        <div style="padding:18px" id="roleDivs">
+
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            <br />
+        </div>
+
+    </div>
+
+    <div class="row"></div>
+
+</div>
+
+
+
+
+
+<script>
+    $('#formsetRole').hide();
+
+
+    $("#roleNew").change(function () {
+        var roleNew = $("#roleNew").val();
+        roleNew = roleNew.toString();
+        $('#roleSubmit').prop('disabled', false);
+
+        if (roleNew == '') {
+            $('#roleSubmit').prop('disabled', true);
+        }
+        // alert(roleNew);
+
+
+        $.ajax({
+            url: `/DashboardAdmin/CheckRoleExist?n=${roleNew}`,
+            type: "GET",
+            dataType: "json",
+            //contentType: "application/json; charset=utf-8",
+
+            success: function (response) {
+                console.log(response);
+
+                if (response != 'Nombre válido') {
+
+                    document.getElementById('responseJson').innerHTML = 'Ese nombre ya está ocuapado prueba otro';
+                    $('#roleSubmit').prop('disabled', true);
+                    $('#roleNew').focus();
+                } else {
+                    document.getElementById('responseJson').innerHTML = '' + response;
+                }
+            },
+
+            error: function (jqXHR, textStatus, err) {
+                //$('#myModalLabel').append(`error: - ${err}`);
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(err);
+
+                alert(err);
+
+            }
+
+        });
+    });
+    $.ajax({
+        url: "/dashboardadmin/Jsonroles",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            
+            var rl = response.length;
+            for (var i = 0; i < rl; i++) {
+                document.getElementById('roles-T').innerHTML +=
+                    `
+                                <tr>
+                                <td class="col-xs-6" align="center">
+                                 <font size="3"> ${response[i].Name} </font>
+                                </td>
+
+                               <td class="col-xs-6">
+
+                                    <a onclick="eliminarRole('${response[i].Id}')" class="btn btn-danger pull-right"  >Eliminar</a>
+                                </td>
+
+                                 </tr>
+                            `;
+            }
+        },
+        fail: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+            alert(err);
+        }
+    });
+    $.ajax({
+        url: "/dashboardadmin/JSONUsers",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            var rl = response.length;
+
+            for (var i = 0; i < rl; i++) {
+                document.getElementById('users-T').innerHTML +=
+                    `<tr>
+                                    <td class="col-xs-4" align="center">
+                                      <font size="3">   ${response[i].Email}</font>
+                                    </td>
+                                   <td class="col-xs-4"> </td>
+                                   <td class="col-xs-4">
+
+                                        <a onclick="DatosUser('${response[i].Id}')" class="btn btn-default pull-right"  >Ver</a>
+                                    </td>
+                                </tr>`;
+            }
+            //alert(response.length);
+        },
+        fail: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(err);
+
+        }
+    });
+    function DatosUser(id) {
+
+
+        var idx = id;
+        // alert(`/dashboardadmin/UserInfoJSON/${idx}`);
+        $.ajax({
+            url: `/dashboardadmin/UserInfoJSON/${idx}`,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                var rl = response.length;
+
+                debugger
+                $('#UserName').html(`Usuario  : ${response.UserName} `);
+                $('#UserId').innerHTML = ` ${response.UserId} `;
+                getRoleUser(response.Id);
+            },
+            fail: function (jqXHR, textStatus, err) {
+                //$('#myModalLabel').append(`error: - ${err}`);
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(err);
+
+                alert(err);
+
+            }
+        });
+    }
+
+    function getRoleUser(id) {
+
+        $.ajax({
+            url: `/dashboardadmin/UserInfoRolesJSON/${id}`,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+
+                // document.getElementById('roleDivs').innerHTML += `${response.RoleId}`;
+                console.log(response.RoleId);
+                var res = response;
+                if (response.Mensaje) {
+                    // alert("What follows is blank: ");
+                    setRole(response.UserId);
+
+                }
+                else {
+                    console.log(res)
+                    getRoleInfo(response.RoleId, id);
+                }
+
+
+            },
+            fail: function (jqXHR, textStatus, err) {
+                //$('#myModalLabel').append(`error: - ${err}`);
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(err);
+                alert();
+                // alert(err);
+
+            }
+        });
+    }
+
+
+    function setRole(id) {
+        $("#id_userSet").val(id);
+        try {
+
+            $('#formsetRole').show();
+            $('#id_userCreated').val(id);
+
+
+            document.getElementById('roleDivs').innerHTML = "";
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+
+    function getRoleInfo(id, id_user) {
+
+        $.ajax({
+            url: `/dashboardadmin/RolesInfoJson/${id}`,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                //alert(id);
+                //var rl = response.length;
+                if (response.Mensaje) {
+                    console.log(response);
+                    $('#formsetRole').show();
+                    document.getElementById('roleDivs').innerHTML = "";
+
+                } else {
+                    console.log(response);
+                    $('#formsetRole').hide();
+                    document.getElementById('roleDivs').innerHTML =
+                        `Role : ${response.Name}
+                        <br/>
+                         <a class="btn btn-default pull-rigth" href="/DashboardAdmin/PermisionsRoles?n=${id_user}">Editar Usuario</a>
+                        `;
+                }
+            },
+            fail: function (jqXHR, textStatus, err) {
+                //$('#myModalLabel').append(`error: - ${err}`);
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(err);
+
+                alert(err);
+
+            }
+        });
+    }
+
+    function eliminarRole(id) {
+        var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar Role';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar este Role?</h4>
+                        <form action="/DashboardAdmin/DeleteRole" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+                            <input type="submit" class="btn btn-danger" name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+    }
+
+</script>
+
+<script>
+    
+                   
+    $.ajax({
+        url: `/dashboardadmin/JsonRoles`,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+
+            for (var i = 0; i < response.length; i++) {
+                document.getElementById('selectRoles').innerHTML +=
+                    `<option value="${response[i].Id}"> ${response[i].Name} </option>`;
+            }
+
+
+
+        },
+        fail: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+            alert();
+            // alert(err);
+
+        }
+    });
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-header"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

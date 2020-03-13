@@ -1,0 +1,322 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "EditCodigoDeEtica";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="~/Content/editor.css" rel="stylesheet" />
+<br />
+<input type="text" class="hidden " id="id_userCreated" value="@User.Identity.GetUserId()" />
+
+<div class="row" id="dataV">
+
+    <div class="col-lg-6 col-md-6">
+        <div class="card" style="padding:18px">
+            <div class="card-header"></div>
+            <div class="card-body">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Texto Actual  : <span id="textoHeader"></span>    </h3>
+
+                    </div>
+                    <div id="textoValores" style="padding:18px"></div>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <div class="card" style="padding:18px">
+            <div class="card-header"></div>
+            <div class="card-body">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Contadores financieros actuales   </h3>
+
+                    </div>
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">*</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="CodigoEtico-T"></tbody>
+                    </table>
+                </div>
+                <hr />
+                <div class="panel panel-default" style="padding:18px" id="textV">
+                    <div id="errorTxt"></div>
+                    <form action="/DashboardAdmin/EditCodigoDeEtica" method="post">
+                       
+                        <input type="text" class=" hidden" id="id_val" name="id_valor" value="" />
+                        <input type="text" class="hidden" name="id_userCreated" value="@User.Identity.GetUserId()" />
+                        <div class="row">
+
+
+                            <div class="col-lg-12 nopadding">
+                                <label>Cabecera</label><br />
+                                <input type="text" id="textoHeadEdit" name="textoHead" class="form-control" required />
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label>Texto</label><br />
+                            </div>
+
+                            <div class="col-lg-12 nopadding">
+                                <textarea id="txtEditorEdit" name="txtEditorEdit" required></textarea>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+<div class="container-fluid" id="editV">
+    <div class="row">
+        <div class="container">
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<div class="row hidden">
+    <h2>EditCodigoDeEtica</h2>
+    <div class="col-lg-6">
+        <div class="card" style="padding:18px">
+            <div class="card-header"></div>
+            <div class="card-body">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Texto Actual : <span id="textoHeader"></span>  </h3>
+
+                    </div>
+                    <div id="textoCodigoEtico" style="padding:18px"></div>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <div class="card" style="padding:18px">
+            <div class="card-header"></div>
+            <div class="card-body">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Contadores financieros actuales   </h3>
+
+                    </div>
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">*</th>
+                                <th class="col-xs-4"></th>
+                                <th class="col-xs-4"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="CodigoEtico-T"></tbody>
+                    </table>
+                </div>
+                <hr />
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="~/Scripts/editor.js"></script>
+<script>
+            $(document).ready(function () {
+                $("#txtEditorEdit").Editor();
+                 $('.Editor-editor').attr('name', 'txtEditorEdit');
+            });
+
+
+
+            $.ajax({
+                    url: "/dashboardadmin/JsonCodigoEtico",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        var rl = response.length;
+
+
+
+                            document.getElementById('CodigoEtico-T').innerHTML +=
+                                        `
+                                        <tr>
+                                        <td class="col-xs-4">
+                                          <font size="12"><i  class="${response[0].textoHead}"></i></font>
+                                        </td>
+                                        <td class="col-xs-4">
+
+
+                                        </td>
+                                       <td class="col-xs-4">
+                                            <button class="btn btn-default pull-right" onclick="EditYeah()">Actualizar</button>
+
+                                            <a onclick="deleteCodigoEt(${response[0].id})" class="btn btn-danger pull-right"  >Eliminar</a>
+                                        </td>
+
+                                         </tr>
+                                    `;
+                             document.getElementById('textoCodigoEtico').innerHTML +=
+                                        `
+                                        ${response[0].texto}
+                                    `;
+
+
+
+
+                        document.getElementById('textoValores').innerHTML += ` ${response[0].texto}`;
+
+                        $('#id_val').val(response[0].id);
+
+                 
+                                     document.getElementById('textoHeader').innerHTML += `${response[0].textoHead}`;
+                                     document.getElementById('textoHeadEdit').innerHTML += `${response[0].textoHead}`;
+                                     document.getElementById('txtEditorEdit').innerHTML += `${response[0].texto}`
+
+                         //alert(response.length);
+
+                    },
+                    fail: function(jqXHR, textStatus, err)  {
+                        //$('#myModalLabel').append(`error: - ${err}`);
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(err);
+
+                        alert(err);
+
+                    }
+            });
+            function deleteCodigoEt(id) {
+                                var idx = '@User.Identity.GetUserId()';
+                                document.getElementById('modal-header').innerHTML = 'Eliminar Código de ética ';
+                                document.getElementById('modal-body').innerHTML = `
+                                <div align="center">
+                                 <h4>¿Estás seguro que deseas eliminar estos Código de ética ?</h4>
+                                <form action="/DashboardAdmin/DeleteCodigoEtica" method="post">
+                                    <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                                    <input type="text" class="hidden" name="id" value="`+ id +`" />
+                                    <input type="submit" class="btn btn-danger"   value="Si estoy seguro, eliminar" />
+                                </form>
+                                </div>`;
+                        $("#exampleModal").modal("show");
+            }
+</script>
+
+<!-- Modal -->
+
+<script>
+
+
+
+    function EditYeah() {
+        let val1 = $('[name="textoHead"]');
+        let val2 = $('.Editor-editor');
+        let id_valor = $('#id_val').val();
+        let id_UC = $('#id_userCreated').val();
+   
+        debugger
+        let data = {
+            textoHead: val1[0].value,
+            txtEditorEdit: val2[0].innerHTML,
+            id_valor: parseInt(id_valor),
+            id_userCreated: id_UC
+        }
+        debugger
+
+        console.log(data);
+        if (val1[0].value.length < 2) {
+            $('#textoHeadEdit').focus();
+
+        }
+        else if (val2[0].innerHTML.length < 1) {
+            $('.Editor-editor').focus();
+            $('#errorTxt').html('Caja de texto vacia');
+        } else {
+
+              debugger
+
+          $.ajax({
+                //url: "/DashboardAdmin/EditValores",
+                url: "/DashboardAdmin/EditCodigoDeEtica",
+                type: "POST",
+                       
+                data: data,
+                success: function (response) {
+                     
+                 
+                    location.reload();
+                },
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+                      alert(" Error: " +textStatus + "  " +jqXHR.responseText);
+
+                }
+            });
+
+
+
+        }
+
+      
+
+
+    }
+
+
+
+</script>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-header"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

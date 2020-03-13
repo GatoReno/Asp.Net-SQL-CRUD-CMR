@@ -1,0 +1,195 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Promociones";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+<h2>Promociones</h2>
+
+
+<div class="row">
+    <div class="col-lg-6">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <small>
+                    Tabla de Promociones
+                </small>
+            </div>
+            <table class="table table-fixed">
+                <thead>
+                    <tr>
+                        <th class="col-xs-3">*</th>
+                        <th class="col-xs-3"></th>
+                        <th class="col-xs-3"></th>
+                        <th class="col-xs-3"></th>
+                    </tr>
+                </thead>
+                <tbody id="promociones-T"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <small>
+                    Promociones
+                </small>
+            </div>
+            <div class="card-body">
+                <div id="2-T" align="center"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-header"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+      $.ajax({
+                url: "/DashboardAdmin/JSONPromociones",
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+
+
+                    console.log(response)
+                    //alert(response);
+
+
+                    var resplength = response.length;
+
+
+                    for (let i = 0; i <= resplength; i++) {
+
+                        document.getElementById('2-T')
+                            .innerHTML += `
+
+                                    <img src="`+ response[i].path + `" height="150px" alt="Alternate Text" />
+                                    <br>
+                                    <tr>
+                                        <td class="col-xs-3"><font size="2">`+ response[i].title + `</font></td>
+                                    </tr>
+                                    <hr/>
+
+                            `;
+                    }
+
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(jqXHR.responseJSON + "pordu");
+
+                }
+
+             });
+
+
+         $.ajax({
+                url: "/DashboardAdmin/JSONPromociones",
+                type: "GET",
+                dataType: "json",
+                //contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+
+
+                    console.log(response)
+                    //alert(response);
+
+
+                    var resplength = response.length;
+
+
+                    for (let i = 0; i <= resplength; i++) {
+
+                        document.getElementById('promociones-T')
+                            .innerHTML += `
+                                    <tr>
+                                        <td class="col-xs-3">
+                                            <a>`+ response[i].id + `<a />
+                                        </td>
+                                        <td class="col-xs-3"><font size="2">`+ response[i].title + `</font></td>
+                                        <td class="col-xs-3"><a href="`+ response[i].path + `"  style="font-size:10pt"  download class="btn btn-default">Ver</a></td>
+                                        <td class="col-xs-3">
+                                            <a href="#" onclick="showDeletePromocion('`+ response[i].id + `')"  style="font-size:10pt"  class="btn btn-danger">Eliminar</a>
+
+                                        </td>
+
+                                    </tr>
+                            `;
+                    }
+
+
+                },
+
+                error: function (jqXHR, textStatus, err) {
+                    //$('#myModalLabel').append(`error: - ${err}`);
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(err);
+
+                    alert(jqXHR.responseJSON + "pordu");
+
+                }
+
+             });
+    function showDeletePromocion(id) {
+                var idx = '@User.Identity.GetUserId()';
+
+                document.getElementById('modal-header').innerHTML = 'Eliminar Producto Financiero Credito';
+                document.getElementById('modal-body').innerHTML = `
+                        <div align="center">
+                         <h4>¿Estás seguro que deseas eliminar el este producto financiero?</h4>
+                        <form action="/DashboardAdmin/DeletePromocion" method="post">
+                            <input type="text" class="hidden" name="id_userCreated" value="`+idx+`" />
+                            <input type="text" class="hidden" name="id" value="`+ id +`" />
+
+                            <input type="submit" class="btn btn-danger"  style="font-size:10pt"  name="name" value="Si estoy seguro, eliminar" />
+
+                        </form>
+
+                        </div>
+                `;
+
+
+                $("#exampleModal").modal("show");
+            }
+</script>

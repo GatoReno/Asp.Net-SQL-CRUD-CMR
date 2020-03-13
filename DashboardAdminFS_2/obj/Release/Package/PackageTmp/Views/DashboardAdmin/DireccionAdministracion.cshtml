@@ -1,0 +1,422 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Dirección de Administración";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="container">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Instrucciones</a></li>
+            <li><a data-toggle="tab" href="#menu1">Contacto</a></li>
+            <li><a data-toggle="tab" href="#menu2">Bolsa de trabajo</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+
+                <div class="col-lg-12 col-md-12">
+                    <h3>Instrucciones</h3>
+                    <p>Bienvenido en esta seccion usted podra ver y modificar los anuncuios de contacto y bolsa de trabajo, elegir el destinatario , etc.</p>
+                </div>
+
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Contacto</h3>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="Contacto_div_form">
+                    <h4>Formulario</h4>
+                    <a href="#democollapseInstrucciones" class="btn btn-default" data-toggle="collapse">Mostrar</a>
+                    <div id="democollapseInstrucciones" class="collapse">
+                        <div class="card card-body" style="padding:20px;">
+                            <form action="/DashboardAdmin/InsertContactoAviso" method="post" enctype="multipart/form-data">
+                                <input type="submit" class="btn btn-success pull-right" value="Agregar" style="font-size:109pt" />
+
+                                <label>Cabecera</label><input type="text" class="form-control" name="head" value="" placeholder="cabecera" required /><br />
+                                <label>Testo 1</label><input type="text" class="form-control" name="th1" value="" placeholder="text 1" required /><br />
+                                <label>Texto 2</label><input type="text" class="form-control" name="th2" value="" placeholder="text 2" /><br />
+                                <label> Imagen </label><input type="file" class="form-control" name="files" value="" placeholder="imagen" /><br />
+                                <label> Destinatario </label><input type="text" class="form-control" id="" name="destino" value="" placeholder="destino@mimail.com" required /><br />
+                                <select name="tipo" class="form-control">
+                                    <option value="Contacto">Contacto</option>
+
+                                </select>
+                                <label> Direccion </label><input type="text" class="form-control" id="" name="direccion" value="" placeholder="direccion " required /><br />
+                                <label> Telefono </label><input type="text" class="form-control" id="" name="telefono" value="" placeholder="telefono" required /><br />
+                                <label> Email</label><input type="email" class="form-control" id="" name="email" value="" placeholder="email" required /><br />
+                                <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+
+                    <div id="errorContacto"></div>
+                    <div class="card card-body hidden" style="padding:20px;" id="contacto_div">
+                        <h3>Datos de contacto</h3>
+
+
+
+
+
+                        <button data-toggle="modal" style="font-size:8pt" data-target="#myModalContactoDelete" class="btn btn-danger pull-right">Eliminar</button>
+                        <form action="/DashboardAdmin/UpdateContactoAviso" method="post" enctype="multipart/form-data">
+                            <input type="submit" name="name" value="Actulizar" class="btn btn-default  "  style="font-size:8pt"/>
+                            <input type="text" class="form-control" value="" name="head" id="head_actual_contacto" /><br />
+                            <input type="text" class="form-control" value="" name="th1" id="th1_actual_contacto" /><br />
+                            <input type="text" class="form-control" value="" name="th2" id="th2_actual_contacto" /><br />
+
+                            <div id="ocult_actual_contacto">
+
+                            </div>
+
+                            <select class="form-control" name="oculto">
+                                <option value="show">Visible</option>
+                                <option value="hidden">Esconder</option>
+                            </select>
+                            <select name="tipo" class="form-control">
+                                <option value="Contacto">Contacto</option>
+
+                            </select>
+
+                            <hr />
+                            <input type="text" class="form-control" value="" name="direccion" id="direccion_actual_contacto" /><br />
+                            <input type="text" class="form-control" value="" name="telefono" id="telefono_actual_contacto" /><br />
+                            <label>Email de contacto visible</label>
+                            <input type="text" class="form-control" value="" name="email" id="email_actual_contacto" /><br />
+                            <label>Destinatario</label>
+                            <input type="text" class="form-control" value="" name="destino" id="destino_contacto" /><br />
+
+
+                            <!-- img_actual_contacto -->
+                            <div id="img_actual_contacto"></div>
+
+                            <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                            <input type="text" id="id_contacto_update" name="id" class="hidden" />
+                        </form>
+
+                        <button id="actualizarIMGcontacto" style="font-size:8pt" class="btn btn-success pull-right" onclick="actualizarIMGcontact()">
+                            Cambiar imagen
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Bolsa de trabajo</h3>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="bolsa_div_form">
+                    <h4>Formulario</h4>
+                    <a href="#democollapseInstrucciones_1" class="btn btn-default" style="font-size:8pt" data-toggle="collapse">Mostrar</a>
+                    <div id="democollapseInstrucciones_1" class="collapse">
+                        <div class="card card-body" style="padding:20px;">
+                            <form action="/DashboardAdmin/InsertContactoAviso" method="post" enctype="multipart/form-data">
+                                <input type="submit" class="btn btn-success pull-right" value="Agregar" />
+
+                                <label>Cabecera</label><input type="text" class="form-control" id="" name="head" value="" placeholder="cabecera" required /><br />
+                                <label>Testo 1</label><input type="text" class="form-control" id="" name="th1" value="" placeholder="text 1" required /><br />
+                                <label>Texto 2</label><input type="text" class="form-control" id="" name="th2" value="" placeholder="text 2" /><br />
+                                <label> Imagen </label><input type="file" class="form-control" id="" name="files" value="" placeholder="imagen" /><br />
+                                <label> Destinatario </label><input type="text" class="form-control" id="" name="destino" value="" placeholder="destino@mimail.com" required /><br />
+                                <select name="tipo" class="form-control">
+                                    <option value="Bolsa">Bolsa de trabajo</option>
+
+                                </select>
+                                <label> Direccion </label><input type="text" class="form-control" id="" name="direccion" value="" placeholder="direccion " required /><br />
+                                <label> Telefono </label><input type="text" class="form-control" id="" name="telefono" value="" placeholder="telefono" required /><br />
+                                <label> Email </label><input type="email" class="form-control" id="" name="email" value="" placeholder="mail" required /><br />
+                                <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+
+                    <div id="errorContacto_2"></div>
+                    <div class="card card-body hidden" style="padding:20px;" id="contacto_div_2">
+                        <h3>Datos de contacto</h3>
+
+
+
+
+
+                        <button data-toggle="modal" style="font-size:8pt" data-target="#myModalContactoDelete2" class="btn btn-danger pull-right">Eliminar</button>
+                        <form action="/DashboardAdmin/UpdateContactoAviso" method="post" enctype="multipart/form-data">
+                            <input type="submit" style="font-size:8pt" name="name" value="Actulizar" class="btn btn-default  " />
+                            <input type="text" class="form-control" value="" name="head" id="head_actual_contacto_2" /><br />
+                            <input type="text" class="form-control" value="" name="th1" id="th1_actual_contacto_2" /><br />
+                            <input type="text" class="form-control" value="" name="th2" id="th2_actual_contacto_2" /><br />
+
+                            <div id="ocult_actual_contacto_2">
+
+                            </div>
+
+                            <select class="form-control" name="oculto">
+                                <option value="show">Visible</option>
+                                <option value="hidden">Esconder</option>
+                            </select>
+                            <select name="tipo" class="form-control">
+                                <option value="Bolsa">Bolsa</option>
+
+                            </select>
+
+                            <hr />
+                            <input type="text" class="form-control" value="" name="direccion" id="direccion_actual_contacto_2" /><br />
+                            <input type="text" class="form-control" value="" name="telefono" id="telefono_actual_contacto_2" /><br />
+                            <label>Email de contacto visible</label>
+                            <input type="text" class="form-control" value="" name="email" id="email_actual_contacto_2" /><br />
+                            <label>Destinatario</label>
+                            <input type="text" class="form-control" value="" name="destino" id="destino_contacto_2" /><br />
+
+
+                            <!-- img_actual_contacto -->
+                            <div id="img_actual_contacto"></div>
+
+                            <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                            <input type="text" id="id_contacto_update_2" name="id" class="hidden " />
+                        </form>
+
+                        <button style="font-size:8pt" id="actualizarIMGcontacto_2" class="btn btn-success pull-right" onclick="actualizarIMGcontact_2()">
+                            Cambiar imagen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModalContactoDelete" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Datos de Contacto</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de que desea eliminar la informacion del anuncio de contacto?</p>
+            </div>
+            <div class="modal-footer">
+                <form action="/DashboardAdmin/DeleteContactoAviso" method="post">
+
+                    <input class="hidden" type="text" id="id_contacto" name="id" />
+                    <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                    <input type="submit" name="name" value="Si quiero eliminar esta infromación" class="btn btn-danger  pull-right" />
+                </form>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModalContactoDelete2" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Datos de Contacto</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de que desea eliminar la informacion del anuncio de contacto?</p>
+            </div>
+            <div class="modal-footer">
+                <form action="/DashboardAdmin/DeleteContactoAviso" method="post">
+
+                    <input class="hidden" type="text" id="id_contacto_2" name="id" />
+                    <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                    <input type="submit" name="name" value="Si quiero eliminar esta infromación" class="btn btn-danger  pull-right" />
+                </form>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="myModalBolsaDelete" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Datos de Contacto</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de que desea eliminar la informacion del anuncio de contacto?</p>
+            </div>
+            <div class="modal-footer">
+                <form action="/DashboardAdmin/DeleteContactoAviso" method="post">
+
+                    <input class="hidden" type="text" id="id_contacto" name="id" />
+                    <input type="text" name="id_userCreated" class="hidden" value="@User.Identity.GetUserId()" />
+                    <input type="submit" name="name" value="Si quiero eliminar esta infromación" class="btn btn-danger  pull-right" />
+                </form>
+                <button  type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+
+    function actualizarIMGcontact() {
+        $('#actualizarIMGcontacto').addClass('hidden');
+        $('#img_actual_contacto').html(' <label> Nueva imagen </label><input type="file" class="form-control" name="files" value="" placeholder="imagen" required /><br /><hr />');
+    }
+
+    function actualizarIMGcontact_2() {
+        $('#actualizarIMGcontacto_2').addClass('hidden');
+        $('#img_actual_contacto_2').html(' <label> Nueva imagen </label><input type="file" class="form-control" name="files" value="" placeholder="imagen" required /><br /><hr />');
+    }
+
+    $.ajax({
+        url: "/dashboardadmin/GetContacto_Contacto",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+
+            var rl = response.length;
+
+            if (rl > 0) {
+                let imgx = response[0].img;
+                let oculto = response[0].oculto;
+
+                if (oculto == "show") {
+                    $('#ocult_actual_contacto').html('Estado actual : visible');
+                } else {
+
+                    $('#ocult_actual_contacto').html('Estado actual : escondido');
+                }
+
+                if (imgx == "sin imagen") {
+                    $('#img_actual_contacto').html('' + imgx + '<br><hr/><br>')
+                } else {
+
+                    $('#img_actual_contacto').html('<img src="' + imgx +
+                        '"  width="200" alt="Imagen de contacto" /><br/>');
+
+                }
+
+                $('#contacto_div').removeClass('hidden');
+                $('#Contacto_div_form').addClass('hidden');
+
+
+                $('#id_contacto').val(response[0].id);
+                $('#id_contacto_update').val(response[0].id);
+                $('#destino_contacto').val(response[0].destino);
+                $('#head_actual_contacto').val(response[0].head);
+                $('#th1_actual_contacto').val(response[0].th1);
+                $('#th2_actual_contacto').val(response[0].th2);
+
+                $('#ocult_actual_contacto').val(response[0].oculto);
+
+
+                $('#direccion_actual_contacto').val(response[0].direccion);
+                $('#telefono_actual_contacto').val(response[0].telefono);
+                $('#email_actual_contacto').val(response[0].email);
+
+
+
+            } else {
+                $('#errorContacto').html('<h3>No hay informacion de contacto en este momento</h3><p>Bienvenido en esta seccion usted podra ver y modificar los anuncuios de contacto y bolsa de trabajo, elegir el destinatario , etc.</p>');
+            }
+            // document.getElementById('txtEditorEdit').innerHTML += `${response[0].texto}`
+            //alert(response.length);
+
+        },
+        fail: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(err);
+
+        }
+    });
+
+
+    $.ajax({
+        url: "/dashboardadmin/GetContacto_Bolsa",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+
+            var rl = response.length;
+
+            if (rl > 0) {
+                $('#bolsa_div_form').addClass('hidden');
+
+                let imgx = response[0].img;
+                let oculto = response[0].oculto;
+
+                if (oculto == "show") {
+                    $('#ocult_actual_contacto_2').html('Estado actual : visible');
+                } else {
+
+                    $('#ocult_actual_contacto_2').html('Estado actual : escondido');
+                }
+
+                if (imgx == "sin imagen") {
+                    $('#img_actual_contacto_2').html('' + imgx + '<br><hr/><br>')
+                } else {
+
+                    $('#img_actual_contacto_2').html('<img src="' + imgx +
+                        '"  width="200" alt="Imagen de contacto" /><br/>');
+
+                }
+
+                $('#contacto_div_2').removeClass('hidden');
+                $('#Contacto_div_form_2').addClass('hidden');
+
+
+                $('#id_contacto_2').val(response[0].id);
+                $('#id_contacto_update_2').val(response[0].id);
+                $('#destino_contacto_2').val(response[0].destino);
+                $('#head_actual_contacto_2').val(response[0].head);
+                $('#th1_actual_contacto_2').val(response[0].th1);
+                $('#th2_actual_contacto_2').val(response[0].th2);
+
+                $('#ocult_actual_contacto_2').val(response[0].oculto);
+
+
+                $('#direccion_actual_contacto_2').val(response[0].direccion);
+                $('#telefono_actual_contacto_2').val(response[0].telefono);
+                $('#email_actual_contacto_2').val(response[0].email);
+
+
+
+            } else {
+                $('#errorContacto_2').html('<h3>No hay informacion de contacto en este momento</h3><p>Bienvenido en esta seccion usted podra ver y modificar los anuncuios de contacto y bolsa de trabajo, elegir el destinatario , etc.</p>');
+            }
+            // document.getElementById('txtEditorEdit').innerHTML += `${response[0].texto}`
+            //alert(response.length);
+
+        },
+        fail: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(err);
+
+        }
+    });
+
+</script>

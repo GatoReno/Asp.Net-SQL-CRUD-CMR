@@ -1,0 +1,340 @@
+﻿
+@{
+    ViewBag.Title = "Calculadora";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+<div class="container">
+    <div class="row ">
+
+
+    </div>
+
+    <div class="row top7">
+        <h3>Prestamos</h3>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">tipo 1</a></li>
+            <li><a data-toggle="tab" href="#menu1">tipo 2</a></li>
+            <li><a data-toggle="tab" href="#menu2">tipo 3</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>HOME</h3>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                    <div class="card" style="padding:20%">
+                        <div class="card-header">
+                            <div id="imgHeader"></div>
+                            <h3>Calculadora</h3>
+                            <hr />
+                        </div>
+                        <div class="card-body">
+                            <label>Tipo de crédito</label><br />
+                            <select id="intereses-T" class="form-control" name="tipoCredito">
+                                <option></option>
+                            </select>
+                            <br />
+                            <label>Monto autorizado</label>
+                            <input type="number" class="form-control" name="prestamo" id="prestamo" value="180000" />
+
+                            <br />
+                            <label>Cuotas a pagar</label>
+                            <input type="number" class="form-control" id="cuotas" name="cuotas" value="14" />
+
+                            <br />
+                            <label>Interés</label>
+                            <input type="text" class="hidden" id="interes" name="name" value="5%" disabled />
+
+
+                            <br />
+                            <input type="button" onclick="calcular2()" class="btn btn-success form-control" name="name" value="Solicitar" />
+                        </div>
+                    </div>
+                </div>
+                <div id="showcards"></div>
+
+                <div class="col-lg-8 col-md-8 col-sm-8">
+
+                    <div id="interesHolder"></div>
+                </div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Some content in menu 1.</p>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="showLoan"></div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Amortización</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card" style="padding:10%">
+
+
+                    <table class="table table-fixed" id="example">
+                        <thead>
+                            <tr>
+
+                                <th class="th-sm">#</th>
+                                <th class="th-sm">Interés</th>
+                                <th class="th-sm">IVA</th>
+                                <th class="th-sm" scope="col">Amortización</th>
+                                <th class="th-sm" scope="col">cargo + IVA</th>
+                                <th class="th-sm">C.Pendiente</th>
+                            </tr>
+                        </thead>
+                        <tbody id="amortiz"></tbody>
+
+
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    //amortiz
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+    function amortizacion(intx) {
+        let nCuotas = $('#cuotas').val();
+        let Cuotas = nCuotas;
+        let prestamo = $('#prestamo').val();
+        let interes = intx;
+        const tipoCredito = $('#tipoCredito').val();
+
+        //interes = interes.replace('%', '');
+        interes = parseInt(interes);
+        interes = interes * 0.01;
+
+
+
+        let ax = prestamo * interes;
+        nCuotas = nCuotas * -1;
+        ax = ax / (1 - Math.pow(1 + interes, nCuotas));
+
+        let deuda = prestamo;
+        let constdeuda = prestamo;
+        $('#amortiz').empty();
+        for (var i = 0; i < Cuotas; i++) {
+
+            deuda = constdeuda;
+
+            let Ii = deuda * interes;
+            let AI = ax - Ii;
+            let IVA = Ii * 0.16;
+
+            var restx = AI;
+            constdeuda = deuda - restx;
+
+            let cargoIva = ax + IVA;
+
+            document.getElementById('amortiz').innerHTML += `
+        <tr>
+        <td class="col-xs-2">`+ ax.toFixed(2) + `</td>
+        <td class="col-xs-2">`+ Ii.toFixed(2) + `</td>
+        <td class="col-xs-2">`+ IVA.toFixed(2) + `</td>
+        <td class="col-xs-2">`+ AI.toFixed(2) + `</td>` +
+                `<td class="col-xs-2">` + cargoIva.toFixed(2) + `</td>` +
+
+
+                `<td class="col-xs-2">` + constdeuda.toFixed(2) + `</td>
+
+        </tr>`;
+
+            //alert(ax, deuda,Ii,AI);
+
+        }
+
+        $("#miModal").modal("show");
+
+    }
+
+    $.ajax({
+        url: "/DashboardAdmin/ProductosFinancierosJSON",
+        type: "GET",
+        dataType: "json",
+        //contentType: "application/json; charset=utf-8",
+
+        success: function (response) {
+
+
+            console.log(response)
+            //alert(response);
+
+
+            var resplength = response.length;
+
+
+            for (let i = 0; i <= resplength; i++) {
+
+                document.getElementById('intereses-T')
+                    .innerHTML += `
+       <option value="`+ response[i].id + `">` + response[i].title + `</option>
+
+
+    `;
+            }
+
+
+
+
+        },
+
+        error: function (jqXHR, textStatus, err) {
+            //$('#myModalLabel').append(`error: - ${err}`);
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(err);
+
+            alert(jqXHR.responseJSON + "pordu");
+
+        }
+
+    });
+
+    function calcular2() {
+
+        var ary = [];
+
+        $('.holderInteres').each(function (a, b) {
+            var name = 'interes';
+            var value = $(this).val();
+            ary.push(value);
+
+
+        });
+
+
+        console.log(ary);
+        // alert(JSON.stringify( ary));
+        $('#showcards').empty();
+        $.each(ary, function (t, value) {
+            //alert(t + ": " + value);
+
+            let nCuotas = $('#cuotas').val();
+            let Cuotas = nCuotas;
+            let prestamo = $('#prestamo').val();
+            let interes = value;
+
+            const tipoCredito = $('#tipoCredito').val();
+
+            interes = interes.replace('%', '');
+            interes = parseInt(interes);
+            var setinteres = interes;
+            interes = value * 0.01;
+
+
+
+            let ax = prestamo * interes;
+
+            let cat = ax * nCuotas / prestamo;
+            cat = cat * 100;
+            cat = cat.toFixed(2);
+
+            nCuotas = nCuotas * -1;
+            ax = ax / (1 - Math.pow(1 + interes, nCuotas));
+            ax = ax.toFixed(2);
+
+            let deuda = prestamo;
+            let constdeuda = prestamo;
+            //showcards
+            document.getElementById('showcards')
+                .innerHTML += `
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <div class="card animated fadeInDown" style="padding:10%">
+                        <div class="card-header">
+                            <p>Prestamo : ${prestamo}</p>
+                            <p>Amortizaciín : ${ax}</p>
+                            <p>Número de cuotas : ${Cuotas}</p>
+                            <p>Tasa : ${value} %</p>
+
+                            <p>CAT anual : ${cat} %</p>
+                            <p><a class="btn btn-success"onclick="amortizacion(${setinteres})">Ver amortización</a></p>
+                        </div>
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+             `;
+
+        });
+
+    }
+    $(document).ready(function () {
+        $("#intereses-T").change(function () {
+            var id = $(this).val();
+
+            $("#interesHolder").empty();
+            $.ajax
+                ({
+                    type: "get",
+                    url: "/ProductoFinanciero/JSONInteres/" + id,
+                    dataType: "json",
+                    cache: false,
+                    success: function (response) {
+                        var respleng = response.length;
+
+
+
+                        for (var i = 0; i < respleng; i++) {
+                            document.getElementById('interesHolder')
+                                .innerHTML += `<input type="type" class="holderInteres hidden" name="name" value="${response[i].interes}" />`;
+                        }
+
+
+                    }
+                });
+            $.ajax({
+                type: "get",
+                url: "/ProductoFinanciero/JSONINFO/" + id,
+                dataType: "json",
+                cache: false,
+                success: function (response) {
+                    var respleng = response.length;
+
+
+                    document.getElementById('imgHeader').innerHTML = `<img class="img-responsive" src="${response.img}" alt="Alternate Text" />`;
+
+
+                }
+            });
+        });
+
+    });
+</script>
+
+
+
